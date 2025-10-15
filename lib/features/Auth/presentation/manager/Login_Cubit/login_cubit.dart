@@ -1,8 +1,24 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:style/features/Auth/data/Repo/Auth_Repo.dart';
 
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit() : super(LoginInitial());
+  LoginCubit(this.authRepo) : super(LoginInitial());
+  final AuthRepo authRepo;
+  Future<void> login({required String email, required String password}) async {
+    emit(LoginLoading());
+    var result = await authRepo.login(email: email, password: password);
+    result.fold(
+      (failure) {
+        print('Login failed: ${failure.errormessage}');
+        emit(LoginFailure(errorMessage: failure.errormessage));
+      },
+      (response) {
+        print('Login success: ${response.data}');
+        emit(LoginSucces());
+      },
+    );
+  }
 }
