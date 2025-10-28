@@ -8,3 +8,17 @@ sealed class FetchSubcategoryState extends Equatable {
 }
 
 final class FetchSubcategoryInitial extends FetchSubcategoryState {}
+
+final class FetchSubcategoryLoading extends FetchSubcategoryState {}
+
+final class FetchSubcategorySuccess extends FetchSubcategoryState {
+  final List<SubCategory> subcategories;
+
+  const FetchSubcategorySuccess({required this.subcategories});
+}
+
+final class FetchSubcategoryFailure extends FetchSubcategoryState {
+  final String errmessage;
+
+  const FetchSubcategoryFailure({required this.errmessage});
+}
