@@ -2,12 +2,12 @@ import 'package:dio/dio.dart';
 
 class Api {
   final Dio _dio;
-  final String baseUrl = 'http://localhost:3000/api/product';
+  final String baseUrl = 'http://localhost:3000/api/';
 
   Api({required Dio dio}) : _dio = dio;
-  Future<Map<String, dynamic>> get({required String endpoint}) async {
+  Future<Response> get({required String endpoint}) async {
     Response response = await _dio.get("$baseUrl$endpoint");
-    return response.data;
+    return response;
   }
 
   Future<Response> post({
