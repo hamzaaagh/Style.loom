@@ -13,7 +13,8 @@ class CustomTextField extends StatefulWidget {
   final Color focusBorderColor;
   final Color cursorColor;
   final String? Function(String?)? validator; // ✅ إضافة validator
-
+  final void Function(String)? onChanged;
+  
   const CustomTextField({
     super.key,
     this.labelText,
@@ -26,7 +27,8 @@ class CustomTextField extends StatefulWidget {
     this.borderColor = Consts.black12,
     this.focusBorderColor = Consts.brown60,
     this.cursorColor = Consts.gray99,
-    this.validator, // ✅ تمرير دالة validator
+    this.validator,
+    this.onChanged,
   });
 
   @override
@@ -39,6 +41,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: widget.onChanged,
       controller: widget.controller,
       obscureText: widget.isPassword ? _obscure : false,
       style: TextStyle(color: widget.textColor, fontSize: 16),

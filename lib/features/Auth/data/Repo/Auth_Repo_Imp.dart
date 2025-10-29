@@ -47,8 +47,8 @@ class AuthRepoImp implements AuthRepo {
     try {
       var response = await api.post(
         data: {
-          'first name': firstname,
-          'last name': lastname,
+          'first_name': firstname,
+          'last_name': lastname,
           'email': email,
           'password': password,
         },

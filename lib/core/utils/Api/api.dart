@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 
 class Api {
   final Dio _dio;
-  final String baseUrl = 'http://localhost:3000/api/';
+  final String baseUrl = 'http://localhost:3000/api/auth/';
 
   Api({required Dio dio}) : _dio = dio;
   Future<Response> get({required String endpoint}) async {
