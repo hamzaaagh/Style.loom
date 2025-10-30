@@ -12,16 +12,21 @@ class HomeRepoImp extends HomeRepo {
   HomeRepoImp({required this.api});
   @override
   Future<Either<Failurs, List<ProductModel>>> fetchproductmodel({
-    required int mainId,
+    int mainId = 0,
   }) async {
     var response = await api.get(endpoint: "categories/main/");
     try {
       if (response.statusCode == 200) {
         List<ProductModel> products = [];
         for (var item in response.data) {
-          if (item["mainId"] != mainId) continue;
-          products.add(ProductModel.fromJson(item));
-        }
+          if (mainId == 0) {
+      products.add(ProductModel.fromJson(item));
+    } 
+    
+    else if (item["mainId"] == mainId) {
+      products.add(ProductModel.fromJson(item));
+    }
+  }
         return right(products);
       } else {
         return left(
