@@ -20,6 +20,7 @@ class AuthRepoImp implements AuthRepo {
         type: "login",
       );
       if (response.statusCode == 200) {
+        print(response.toString());
         return right(response);
       } else {
         return left(

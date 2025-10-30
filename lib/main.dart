@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:style/core/utils/Api/api.dart';
 
 import 'package:style/features/Auth/data/Repo/Auth_Repo_Imp.dart';
+import 'package:style/features/Auth/presentation/manager/Login_Cubit/login_cubit.dart';
 import 'package:style/features/Auth/presentation/manager/Register_Cubit/register_cubit.dart';
+import 'package:style/features/Auth/presentation/view/Log_in_screen/Login_View.dart';
 
 import 'package:style/features/Auth/presentation/view/Register_screen/register_view.dart';
 
@@ -29,6 +31,10 @@ class StyleLoom extends StatelessWidget {
               create: (context) =>
                   RegisterCubit(AuthRepoImp(api: Api(dio: Dio()))),
             ),
+             BlocProvider(
+              create: (context) =>
+                  LoginCubit(AuthRepoImp(api: Api(dio: Dio()))),
+            ),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -37,7 +43,7 @@ class StyleLoom extends StatelessWidget {
           ),
         );
       },
-      child: RegisterView(), // ✅ صفحة البداية
+      child: LoginView(), // ✅ صفحة البداية
     );
   }
 }
