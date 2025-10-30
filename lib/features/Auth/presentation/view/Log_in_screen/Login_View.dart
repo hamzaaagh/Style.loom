@@ -80,7 +80,7 @@ class LoginView extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const RegisterView(),
+                              builder: (context) => RegisterView(),
                             ),
                           );
                         },
