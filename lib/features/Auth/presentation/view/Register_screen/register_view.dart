@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:style/core/Consts/color_consts.dart';
+import 'package:style/features/Auth/presentation/view/Log_in_screen/Login_View.dart';
 import 'package:style/features/Auth/presentation/view/widgets/custom_elevated_button.dart';
 import 'package:style/features/Auth/presentation/view/widgets/custom_text_field.dart';
 
@@ -84,9 +85,16 @@ class RegisterView extends StatelessWidget {
                           fontSize: 15.sp,
                         ),
                       ),
-
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          // ✅ الانتقال إلى صفحة تسجيل الدخول
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginView(),
+                            ),
+                          );
+                        },
                         child: Text(
                           "Sign in",
                           style: TextStyle(

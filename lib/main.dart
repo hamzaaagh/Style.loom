@@ -23,7 +23,7 @@ class StyleLoom extends StatelessWidget {
           home: child,
         );
       },
-      child: const RegisterView(), // ✅ صفحة البداية
+      child: const LoginView(),
     );
   }
 }

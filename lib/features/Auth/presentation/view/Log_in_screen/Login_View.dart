@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:style/core/Consts/color_consts.dart';
+import 'package:style/features/Auth/presentation/view/Register_screen/register_view.dart';
 import 'package:style/features/Auth/presentation/view/widgets/custom_elevated_button.dart';
 import 'package:style/features/Auth/presentation/view/widgets/custom_text_field.dart';
+
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -19,7 +21,7 @@ class LoginView extends StatelessWidget {
             child: Container(
               height: 400.h,
               width: 350.w,
-              padding: EdgeInsets.all(32),
+              padding: const EdgeInsets.all(32),
               decoration: BoxDecoration(
                 color: Consts.black10,
                 borderRadius: BorderRadius.circular(18),
@@ -49,12 +51,12 @@ class LoginView extends StatelessWidget {
                     style: TextStyle(color: Consts.brown60, fontSize: 12.sp),
                   ),
                   SizedBox(height: 10.h),
-                  CustomTextField(
+                  const CustomTextField(
                     labelText: 'Email',
                     hintText: 'example@domain.com',
                   ),
                   SizedBox(height: 15.h),
-                  CustomTextField(
+                  const CustomTextField(
                     labelText: "Password",
                     hintText: "Enter your password",
                     isPassword: true,
@@ -72,9 +74,16 @@ class LoginView extends StatelessWidget {
                           fontSize: 15.sp,
                         ),
                       ),
-
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          // ✅ الانتقال إلى صفحة إنشاء الحساب
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const RegisterView(),
+                            ),
+                          );
+                        },
                         child: Text(
                           "Register now",
                           style: TextStyle(

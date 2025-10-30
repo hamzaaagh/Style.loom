@@ -12,7 +12,7 @@ class CustomTextField extends StatefulWidget {
   final Color borderColor;
   final Color focusBorderColor;
   final Color cursorColor;
-  final String? Function(String?)? validator; // ✅ إضافة validator
+  final String? Function(String?)? validator; 
 
   const CustomTextField({
     super.key,
