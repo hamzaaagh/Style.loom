@@ -12,9 +12,9 @@ class CustomTextField extends StatefulWidget {
   final Color borderColor;
   final Color focusBorderColor;
   final Color cursorColor;
-  final String? Function(String?)? validator; // ✅ إضافة validator
-  final void Function(String)? onChanged;
-  
+  final String? Function(String?)? validator;
+  final void Function(String)? onChanged; // ← تم دمجها من شغل رفيقك
+
   const CustomTextField({
     
     super.key,
@@ -42,12 +42,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged: widget.onChanged,
+      onChanged: widget.onChanged, // ✅ من شغل رفيقك
       controller: widget.controller,
       obscureText: widget.isPassword ? _obscure : false,
       style: TextStyle(color: widget.textColor, fontSize: 16),
       cursorColor: widget.cursorColor,
-      validator: widget.validator, // ✅ ربط validator
+      validator: widget.validator,
       decoration: InputDecoration(
         filled: true,
         fillColor: Consts.black12,
@@ -55,10 +55,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         labelStyle: TextStyle(color: widget.labelColor),
         hintText: widget.hintText,
         hintStyle: TextStyle(color: widget.hintColor),
-        errorStyle: const TextStyle(
-          color: Colors.red,
-          fontSize: 12,
-        ), // خطأ باللون الأحمر
+        errorStyle: const TextStyle(color: Colors.red, fontSize: 12),
         suffixIcon: widget.isPassword
             ? IconButton(
                 icon: Icon(

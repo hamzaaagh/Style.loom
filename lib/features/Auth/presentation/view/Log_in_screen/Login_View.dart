@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:style/core/Consts/color_consts.dart';
 import 'package:style/features/Auth/presentation/manager/Login_Cubit/login_cubit.dart';
+import 'package:style/features/Auth/presentation/view/Register_screen/register_view.dart';
 import 'package:style/features/Auth/presentation/view/widgets/custom_elevated_button.dart';
 import 'package:style/features/Auth/presentation/view/widgets/custom_text_field.dart';
 
@@ -77,11 +78,10 @@ class LoginView extends StatelessWidget {
                       CustomElevatedButton(
                         text: "Sign In",
                         onPressed: () {
-                       
-                            BlocProvider.of<LoginCubit>(context).login(
-                              email: emailController.text,
-                              password: passwordController.text,
-                            );
+                          BlocProvider.of<LoginCubit>(context).login(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
                         },
                       ),
                       SizedBox(height: 15.h),
@@ -97,7 +97,16 @@ class LoginView extends StatelessWidget {
                           ),
 
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return RegisterView();
+                                  },
+                                ),
+                              );
+                            },
                             child: Text(
                               "Register now",
                               style: TextStyle(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:style/core/Consts/color_consts.dart';
 import 'package:style/features/Auth/presentation/manager/Register_Cubit/register_cubit.dart';
+import 'package:style/features/Auth/presentation/view/Log_in_screen/Login_View.dart';
 import 'package:style/features/Auth/presentation/view/widgets/custom_elevated_button.dart';
 import 'package:style/features/Auth/presentation/view/widgets/custom_text_field.dart';
 
@@ -14,6 +14,7 @@ class RegisterView extends StatelessWidget {
   String? lastname;
   String? email;
   String? password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +28,7 @@ class RegisterView extends StatelessWidget {
                 child: Container(
                   height: 550.h,
                   width: 350.w,
-                  padding: EdgeInsets.all(32),
+                  padding: const EdgeInsets.all(32),
                   decoration: BoxDecoration(
                     color: Consts.black10,
                     borderRadius: BorderRadius.circular(18),
@@ -56,7 +57,7 @@ class RegisterView extends StatelessWidget {
                       ),
                       SizedBox(height: 5.h),
                       Text(
-                        "Welcome __ create your new account",
+                        "Welcome — create your new account",
                         style: TextStyle(
                           color: Consts.brown60,
                           fontSize: 12.sp,
@@ -64,36 +65,25 @@ class RegisterView extends StatelessWidget {
                       ),
                       SizedBox(height: 15.h),
                       CustomTextField(
-                        onChanged: (value) {
-                          firstname = value;
-                        },
+                        onChanged: (value) => firstname = value,
                         labelText: 'First Name',
                         hintText: 'Enter your first name',
                       ),
                       SizedBox(height: 15.h),
                       CustomTextField(
-                        onChanged: (value) {
-                          lastname = value;
-                        },
+                        onChanged: (value) => lastname = value,
                         labelText: "Last Name",
                         hintText: "Enter your last name",
-                        isPassword: false,
                       ),
                       SizedBox(height: 15.h),
                       CustomTextField(
-                        onChanged: (value) {
-                          email = value;
-                        },
+                        onChanged: (value) => email = value,
                         labelText: 'Email',
                         hintText: 'Enter your email',
                       ),
-                      // CustomElevatedButton(text: "Sign In", onPressed: () {}),
                       SizedBox(height: 15.h),
                       CustomTextField(
-                        
-                        onChanged: (value) {
-                          password = value;
-                        },
+                        onChanged: (value) => password = value,
                         labelText: "Password",
                         hintText: "Create your password",
                         isPassword: true,
@@ -103,10 +93,10 @@ class RegisterView extends StatelessWidget {
                         text: "Register",
                         onPressed: () {
                           BlocProvider.of<RegisterCubit>(context).register(
-                            email: email!,
-                            password: password!,
-                            firstname: firstname!,
-                            lastname: lastname!,
+                            email: email ?? '',
+                            password: password ?? '',
+                            firstname: firstname ?? '',
+                            lastname: lastname ?? '',
                           );
                         },
                       ),
@@ -121,9 +111,15 @@ class RegisterView extends StatelessWidget {
                               fontSize: 15.sp,
                             ),
                           ),
-
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LoginView(),
+                                ),
+                              );
+                            },
                             child: Text(
                               "Sign in",
                               style: TextStyle(

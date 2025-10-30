@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:style/core/utils/Api/api.dart';
-
 import 'package:style/features/Auth/data/Repo/Auth_Repo_Imp.dart';
 import 'package:style/features/Auth/presentation/manager/Login_Cubit/login_cubit.dart';
 import 'package:style/features/Auth/presentation/manager/Register_Cubit/register_cubit.dart';
 import 'package:style/features/Auth/presentation/view/Log_in_screen/Login_View.dart';
 
-import 'package:style/features/Auth/presentation/view/Register_screen/register_view.dart';
+import 'package:style/features/Auth/presentation/view/Log_in_screen/Login_View.dart';
+import 'package:style/features/Home/presentation/view/Home_View.dart';
 
 void main() {
   runApp(const StyleLoom());
@@ -43,7 +43,12 @@ class StyleLoom extends StatelessWidget {
           ),
         );
       },
+<<<<<<< HEAD
       child: LoginView(), // ✅ صفحة البداية
+=======
+      // 👇 هون بتحدد صفحة البداية
+      child: const HomeView(), // أو RegisterView() حسب شو بدك تفتح أول
+>>>>>>> origin/yazan-branch
     );
   }
 }
