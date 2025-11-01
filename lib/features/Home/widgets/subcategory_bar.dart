@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:style/features/Home/presentation/manager/fetch_Sub_Category_cubit/fetch_subcategory_cubit.dart';
 
 class SubCategoryBar extends StatelessWidget {
   final String selectedCategory;
   final Function(String)? onSubCategorySelected;
 
-   SubCategoryBar({
+  SubCategoryBar({
     super.key,
     required this.selectedCategory,
     this.onSubCategorySelected,
@@ -44,53 +46,77 @@ class SubCategoryBar extends StatelessWidget {
 
     if (items.isEmpty) return const SizedBox.shrink();
 
-    return Container(
-      height: 80,
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: items.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 16),
-        itemBuilder: (context, index) {
-          final item = items[index];
-          final name = item['name']!;
-          final image = item['image']!;
+    return BlocBuilder<FetchSubcategoryCubit, FetchSubcategoryState>(
+      builder: (context, state) {
+        if (state is FetchSubcategorySuccess) {
+          print(state.toString());
+          return Container(
+            height: 80,
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: state.subcategories.length,
+              itemBuilder: (context, mainIndex) {
+                final subItems = state.subcategories[mainIndex].subCategories!;
 
-          return GestureDetector(
-            onTap: () => onSubCategorySelected?.call(name),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white10,
-                  ),
-                  child: ClipOval(
-                    child: Image.asset(
-                      image,
-                      fit: BoxFit.contain,
-                      errorBuilder: (_, __, ___) => const Icon(
-                        Icons.category_outlined,
-                        color: Colors.white24,
-                        size: 20,
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: subItems.map((subItem) {
+                    final name = subItem.name!;
+                    final image = subItem.imageUrl!;
+
+                    return GestureDetector(
+                      onTap: () => onSubCategorySelected?.call(name),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 36,
+                              height: 36,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white10,
+                              ),
+                              child: ClipOval(
+                                child: Image.network(
+                                  image,
+                                  fit: BoxFit.contain,
+                                  errorBuilder: (_, __, ___) => const Icon(
+                                    Icons.category_outlined,
+                                    color: Colors.white24,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              name,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  name,
-                  style: const TextStyle(color: Colors.white, fontSize: 12),
-                  textAlign: TextAlign.center,
-                ),
-              ],
+                    );
+                  }).toList(),
+                );
+              },
             ),
           );
-        },
-      ),
+        } else if (state is FetchSubcategoryFailure) {
+          print("ddddd");
+          return const SizedBox.shrink();
+        } else {
+          print(state.toString());
+          return const SizedBox.shrink();
+        }
+      },
     );
   }
 }
+ //onTap: () => onSubCategorySelected?.call(name),

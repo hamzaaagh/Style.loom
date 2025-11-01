@@ -12,7 +12,7 @@ final class FetchSubcategoryInitial extends FetchSubcategoryState {}
 final class FetchSubcategoryLoading extends FetchSubcategoryState {}
 
 final class FetchSubcategorySuccess extends FetchSubcategoryState {
-  final List<SubCategory> subcategories;
+  final List<MainCategory> subcategories;
 
   const FetchSubcategorySuccess({required this.subcategories});
 }

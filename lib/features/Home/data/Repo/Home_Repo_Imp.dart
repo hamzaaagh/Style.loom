@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:style/core/Models/product_model/main_category.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
 import 'package:style/core/Models/product_model/sub_category.dart';
 import 'package:style/core/utils/Api/api.dart';
@@ -14,19 +15,17 @@ class HomeRepoImp extends HomeRepo {
   Future<Either<Failurs, List<ProductModel>>> fetchproductmodel({
     int mainId = 0,
   }) async {
-    var response = await api.get(endpoint: "categories/main/");
+    var response = await api.get(endpoint: "product");
     try {
       if (response.statusCode == 200) {
         List<ProductModel> products = [];
         for (var item in response.data) {
           if (mainId == 0) {
-      products.add(ProductModel.fromJson(item));
-    } 
-    
-    else if (item["mainId"] == mainId) {
-      products.add(ProductModel.fromJson(item));
-    }
-  }
+            products.add(ProductModel.fromJson(item));
+          } else if (item["subCategory"]["mainId"] == mainId) {
+            products.add(ProductModel.fromJson(item));
+          }
+        }
         return right(products);
       } else {
         return left(
@@ -45,16 +44,20 @@ class HomeRepoImp extends HomeRepo {
   }
 
   @override
-  Future<Either<Failurs, List<SubCategory>>> fetchsubcategory({
+  Future<Either<Failurs, List<MainCategory>>> fetchsubcategory({
     required int mainId,
   }) async {
     var response = await api.get(endpoint: "categories/main/");
     try {
       if (response.statusCode == 200) {
-        List<SubCategory> subcategories = [];
+        print("200 OK");
+        List<MainCategory> subcategories = [];
         for (var item in response.data) {
-          if (item["mainId"] != mainId) continue;
-          subcategories.add(SubCategory.fromJson(item));
+          if (mainId == 0) {
+            subcategories.add(MainCategory.fromJson(item));
+          } else if (item["subCategory"][0]["mainId"] == mainId) {
+            subcategories.add(MainCategory.fromJson(item));
+          }
         }
         return right(subcategories);
       } else {

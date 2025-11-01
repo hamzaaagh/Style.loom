@@ -7,6 +7,7 @@ import 'package:style/features/Auth/presentation/manager/Login_Cubit/login_cubit
 import 'package:style/features/Auth/presentation/view/Register_screen/register_view.dart';
 import 'package:style/features/Auth/presentation/view/widgets/custom_elevated_button.dart';
 import 'package:style/features/Auth/presentation/view/widgets/custom_text_field.dart';
+import 'package:style/features/Home/presentation/view/Home_View.dart';
 
 // ignore: must_be_immutable
 class LoginView extends StatelessWidget {
@@ -82,6 +83,9 @@ class LoginView extends StatelessWidget {
                             email: emailController.text,
                             password: passwordController.text,
                           );
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return HomeView();
+                          }));
                         },
                       ),
                       SizedBox(height: 15.h),
