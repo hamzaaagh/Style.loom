@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ProductGrid extends StatelessWidget {
   final String category;
-  final List<Map<String, String>> products;
+  final List<Map<String, dynamic>> products;
 
   const ProductGrid({
     super.key,

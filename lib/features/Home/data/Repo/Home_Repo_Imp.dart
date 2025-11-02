@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:style/core/Models/product_model/main_category.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
-import 'package:style/core/Models/product_model/sub_category.dart';
+
 import 'package:style/core/utils/Api/api.dart';
 import 'package:style/core/utils/errors/failurs.dart';
 import 'package:style/features/Home/data/Repo/Home_Repo.dart';
@@ -55,7 +55,7 @@ class HomeRepoImp extends HomeRepo {
         for (var item in response.data) {
           if (mainId == 0) {
             subcategories.add(MainCategory.fromJson(item));
-          } else if (item["subCategory"][0]["mainId"] == mainId) {
+          } else if (item["subCategories"][0]["mainId"] == mainId) {
             subcategories.add(MainCategory.fromJson(item));
           }
         }

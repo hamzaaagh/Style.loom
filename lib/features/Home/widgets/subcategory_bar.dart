@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+
 import 'package:style/features/Home/presentation/manager/fetch_Sub_Category_cubit/fetch_subcategory_cubit.dart';
 
 class SubCategoryBar extends StatelessWidget {
@@ -12,110 +14,87 @@ class SubCategoryBar extends StatelessWidget {
     this.onSubCategorySelected,
   });
 
-  final Map<String, List<Map<String, String>>> subCategoriesWithImages = {
-    'All': [
-      {'name': 'All', 'image': 'assets/subcategory/all.png'},
-      {'name': 'Tops', 'image': 'assets/subcategory/tops.png'},
-      {'name': 'Bottoms', 'image': 'assets/subcategory/bottoms.png'},
-      {'name': 'Shoes', 'image': 'assets/subcategory/shoes.png'},
-      {'name': 'Accessories', 'image': 'assets/subcategory/accessories.png'},
-    ],
-    'Man': [
-      {'name': 'Shirts', 'image': 'assets/subcategory/shirts.png'},
-      {'name': 'Pants', 'image': 'assets/subcategory/pants.png'},
-      {'name': 'Jackets', 'image': 'assets/subcategory/jackets.png'},
-      {'name': 'Sneakers', 'image': 'assets/subcategory/sneakers.png'},
-    ],
-    'Woman': [
-      {'name': 'Dresses', 'image': 'assets/subcategory/dresses.png'},
-      {'name': 'Blouses', 'image': 'assets/subcategory/blouses.png'},
-      {'name': 'Jeans', 'image': 'assets/subcategory/jeans.png'},
-      {'name': 'Heels', 'image': 'assets/subcategory/heels.png'},
-    ],
-    'Kids': [
-      {'name': 'T-Shirts', 'image': 'assets/subcategory/tshirts.png'},
-      {'name': 'Shorts', 'image': 'assets/subcategory/shorts.png'},
-      {'name': 'Hats', 'image': 'assets/subcategory/hats.png'},
-      {'name': 'Socks', 'image': 'assets/subcategory/socks.png'},
-    ],
-  };
+ 
 
   @override
   Widget build(BuildContext context) {
-    final items = subCategoriesWithImages[selectedCategory] ?? [];
-
-    if (items.isEmpty) return const SizedBox.shrink();
+   
 
     return BlocBuilder<FetchSubcategoryCubit, FetchSubcategoryState>(
       builder: (context, state) {
         if (state is FetchSubcategorySuccess) {
+          final allSubCats = state.subcategories
+    .expand((e) => e.subCategories!)
+    .toList();
           print(state.toString());
           return Container(
-            height: 80,
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: state.subcategories.length,
-              itemBuilder: (context, mainIndex) {
-                final subItems = state.subcategories[mainIndex].subCategories!;
+  height: 80,
+  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+  child: ListView.builder(
+    scrollDirection: Axis.horizontal,
+    itemCount: allSubCats.length,
+    itemBuilder: (context, i) {
+      final sub = allSubCats[i];
 
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: subItems.map((subItem) {
-                    final name = subItem.name!;
-                    final image = subItem.imageUrl!;
-
-                    return GestureDetector(
-                      onTap: () => onSubCategorySelected?.call(name),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 36,
-                              height: 36,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white10,
-                              ),
-                              child: ClipOval(
-                                child: Image.network(
-                                  image,
-                                  fit: BoxFit.contain,
-                                  errorBuilder: (_, __, ___) => const Icon(
-                                    Icons.category_outlined,
-                                    color: Colors.white24,
-                                    size: 20,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 6),
-                            Text(
-                              name,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                );
-              },
-            ),
-          );
+      return SubCategoryItem(
+        image: sub.imageUrl ?? "",
+        category: sub.name ?? "",
+        onSubCategorySelected: onSubCategorySelected,
+      );
+    },
+  ),
+);
         } else if (state is FetchSubcategoryFailure) {
-          print("ddddd");
+          print("failure");
           return const SizedBox.shrink();
         } else {
           print(state.toString());
           return const SizedBox.shrink();
         }
       },
+    );
+  }
+}
+
+class SubCategoryItem extends StatelessWidget {
+  final String category;
+  final String image;
+  final Function(String)? onSubCategorySelected;
+
+  const SubCategoryItem({
+    super.key,
+    required this.category,
+    required this.image,
+    this.onSubCategorySelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => onSubCategorySelected?.call(category),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Container(
+              width: 36, height: 36,
+              decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white10),
+              child: ClipOval(
+                child: Image.network(
+                  image,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) => const Icon(Icons.category_outlined, color: Colors.white24),
+                ),
+              ),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              category,
+              style: const TextStyle(color: Colors.white, fontSize: 12),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
