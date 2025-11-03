@@ -1,100 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:style/features/Home/presentation/manager/fetch_product_cubit/fetch_product_model_cubit.dart';
+import 'package:style/features/Home/widgets/product_card.dart';
 
 class ProductGrid extends StatelessWidget {
-  final String category;
-  final List<Map<String, dynamic>> products;
-
-  const ProductGrid({
-    super.key,
-    required this.category,
-    required this.products,
-  });
+ 
+  const ProductGrid({super.key,});
 
   @override
   Widget build(BuildContext context) {
-    if (products.isEmpty) {
-      return Center(
-        child: Text(
-          'No products in $category',
-          style: const TextStyle(color: Colors.white70),
-        ),
-      );
-    }
+    // if (productcard.isEmpty) {
+    //   return Center(
+    //     child: Text(
+    //       'No products in $category',
+    //       style: const TextStyle(color: Colors.white70),
+    //     ),
+    //   );
+    // }
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      child: GridView.builder(
-        itemCount: products.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          childAspectRatio: 0.68,
-        ),
-        itemBuilder: (context, index) {
-          final product = products[index];
-          return ProductCard(title: product['name'] ?? 'Product');
+      child: BlocBuilder<FetchProductModelCubit, FetchProductModelState>(
+        builder: (context, state) {
+          
+          print(state);
+          if (state is FetchProductModelSucces) {
+            return GridView.builder(
+              itemCount: state.products.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                childAspectRatio: 0.68,
+              ),
+              itemBuilder: (context, index) {
+                final product = state.products[index];
+                return ProductCard(product: product);
+              },
+            );
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
         },
-      ),
-    );
-  }
-}
-
-class ProductCard extends StatelessWidget {
-  final String title;
-
-  const ProductCard({super.key, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFF1A1A1A),
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.4),
-            blurRadius: 6,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white10,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-              ),
-              child: const Center(
-                child: Icon(
-                  Icons.image_outlined,
-                  size: 48,
-                  color: Colors.white24,
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(height: 6),
-                const Text(
-                  '\$20.00',
-                  style: TextStyle(color: Colors.white70, fontSize: 13),
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }

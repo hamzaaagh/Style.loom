@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:style/core/Consts/color_consts.dart';
 import 'package:style/features/Home/presentation/manager/fetch_Sub_Category_cubit/fetch_subcategory_cubit.dart';
+import 'package:style/features/Home/presentation/manager/fetch_product_cubit/fetch_product_model_cubit.dart';
+import 'package:style/features/Home/widgets/product_grid.dart';
 
 import 'package:style/features/Home/widgets/subcategory_bar.dart';
 
@@ -30,12 +32,13 @@ class _CategoryTabSectionState extends State<CategoryTabSection>
     tabController = TabController(length: 4, vsync: this);
 
     context.read<FetchSubcategoryCubit>().fetchSubCategory(mainId: 0);
+    context.read<FetchProductModelCubit>().fetchproductmodel(mainId: 0);
 
     tabController.addListener(() {
       if (!tabController.indexIsChanging) {
         final id = tabController.index;
         context.read<FetchSubcategoryCubit>().fetchSubCategory(mainId: id);
-        print(id);
+        context.read<FetchProductModelCubit>().fetchproductmodel(mainId: id);
       }
     });
   }
@@ -87,27 +90,7 @@ class _CategoryTabSectionState extends State<CategoryTabSection>
             debugPrint('Selected subcategory → $subCategory');
           },
         ),
-        // Expanded(
-        //   child: BlocBuilder<FetchSubcategoryCubit, FetchSubcategoryState>(
-        //     builder: (context, state) {
-        //       if (state is FetchSubcategoryLoading) {
-        //         return const Center(child: CircularProgressIndicator());
-        //       } else if (state is FetchSubcategorySuccess) {
-        //         return BlocBuilder<FetchProductModelCubit, FetchProductModelState>(
-
-        //           builder: (context, state) {
-        //             return ProductGrid(
-        //               category: category,
-        //               products: state.subcategories,
-        //             );
-        //           },
-        //         );
-        //       } else {
-        //         return const SizedBox.shrink();
-        //       }
-        //     },
-        //   ),
-        // ),
+        Expanded(child: ProductGrid()),
       ],
     );
   }

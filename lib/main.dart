@@ -38,7 +38,7 @@ class StyleLoom extends StatelessWidget {
                   LoginCubit(AuthRepoImp(api: Api(dio: Dio()))),
             ),
             BlocProvider(create: (context)=> FetchSubcategoryCubit(HomeRepoImp(api: Api(dio: Dio(),),),)..fetchSubCategory(mainId: 0)),
-            BlocProvider(create: (context)=> FetchProductModelCubit(HomeRepoImp(api: Api(dio: Dio(),),),),),
+            BlocProvider(create: (context)=> FetchProductModelCubit(HomeRepoImp(api: Api(dio: Dio(),),),)..fetchproductmodel(mainId: 0),),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
