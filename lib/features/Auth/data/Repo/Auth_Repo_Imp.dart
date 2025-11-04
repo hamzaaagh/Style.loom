@@ -20,6 +20,7 @@ class AuthRepoImp implements AuthRepo {
         type: "login",
       );
       if (response.statusCode == 200) {
+        print(response.toString());
         return right(response);
       } else {
         return left(
@@ -47,8 +48,8 @@ class AuthRepoImp implements AuthRepo {
     try {
       var response = await api.post(
         data: {
-          'first name': firstname,
-          'last name': lastname,
+          'first_name': firstname,
+          'last_name': lastname,
           'email': email,
           'password': password,
         },
