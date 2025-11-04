@@ -3,10 +3,7 @@ import 'package:style/core/Models/product_model/product_model.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel product;
-  const ProductCard({
-    super.key,
-   required this.product,
-  });
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +29,18 @@ class ProductCard extends StatelessWidget {
                 color: Colors.white10,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
               ),
-              child: Center(child: Image.network(product.imageUrl, fit: BoxFit.cover)),
+              child: Center(
+                child: Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    Image.network(product.imageUrl, fit: BoxFit.cover),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: FavoriteIcon(),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
           Padding(
@@ -49,13 +57,46 @@ class ProductCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  product.price.toString(),
+                  "${product.price.toString()}\$",
                   style: TextStyle(color: Colors.white70, fontSize: 13),
                 ),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class FavoriteIcon extends StatefulWidget {
+   FavoriteIcon({super.key});
+
+  @override
+  State<FavoriteIcon> createState() => _FavoriteIconState();
+}
+
+class _FavoriteIconState extends State<FavoriteIcon> {
+   IconData icon = Icons.favorite_border;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(40),
+        color: Colors.white,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(3),
+        child: InkWell(
+          onTap: () {
+             icon = Icons.favorite_border == icon
+                ? Icons.favorite
+                : Icons.favorite_border;
+             setState(() {});
+          },
+          child: Icon(icon, color: Colors.red, size: 30),
+        ),
       ),
     );
   }

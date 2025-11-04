@@ -5,8 +5,7 @@ import 'package:style/features/Home/presentation/manager/fetch_product_cubit/fet
 import 'package:style/features/Home/widgets/product_card.dart';
 
 class ProductGrid extends StatelessWidget {
- 
-  const ProductGrid({super.key,});
+  const ProductGrid({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +18,11 @@ class ProductGrid extends StatelessWidget {
     //   );
     // }
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.01,
+      margin: EdgeInsets.all(8),
       child: BlocBuilder<FetchProductModelCubit, FetchProductModelState>(
         builder: (context, state) {
-          
           print(state);
           if (state is FetchProductModelSucces) {
             return GridView.builder(
@@ -40,7 +39,13 @@ class ProductGrid extends StatelessWidget {
               },
             );
           } else {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+              child: CircularProgressIndicator(
+                color: kDefaultIconLightColor,
+                backgroundColor: Colors.grey,
+                strokeWidth: 5,
+              ),
+            );
           }
         },
       ),

@@ -83,12 +83,24 @@ class _CategoryTabSectionState extends State<CategoryTabSection>
 
   Widget _buildTabContent(String category) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SubCategoryBar(
           selectedCategory: category,
           onSubCategorySelected: (subCategory) {
             debugPrint('Selected subcategory → $subCategory');
           },
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 12),
+          child: Text(
+            "Latest",
+            style: TextStyle(
+              color: Consts.brown70,
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
         Expanded(child: ProductGrid()),
       ],
