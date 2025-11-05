@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:style/core/Consts/color_consts.dart';
+import 'package:style/core/Widgets/ButtonNavBar.dart';
 import 'package:style/features/Home/widgets/carousel_section.dart';
 import 'package:style/features/Home/widgets/category_tab_section.dart';
 
@@ -53,6 +54,7 @@ class _HomeViewState extends State<HomeView> {
           Expanded(child: CategoryTabSection()),
         ],
       ),
+      bottomNavigationBar: Buttonnavbar(),
     );
   }
 }

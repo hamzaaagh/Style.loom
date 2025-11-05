@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   bloc: ^9.1.0
+  carousel_slider: ^5.1.1
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
   dio: ^5.9.0
@@ -38,7 +39,8 @@ dependencies:
   flutter_bloc: ^9.1.1
   flutter_screenutil: ^5.9.3
   get_it: ^8.2.0
-  carousel_slider: ^5.1.1
+  hugeicons: ^1.1.1
+  ionicons: ^0.2.1
 
 dev_dependencies:
   flutter_lints: ^5.0.0

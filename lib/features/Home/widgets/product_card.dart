@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:style/core/Consts/color_consts.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
 
 class ProductCard extends StatelessWidget {
@@ -84,7 +85,7 @@ class _FavoriteIconState extends State<FavoriteIcon> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(40),
-        color: Colors.white,
+        color: Consts.brown65,
       ),
       child: Padding(
         padding: const EdgeInsets.all(3),
