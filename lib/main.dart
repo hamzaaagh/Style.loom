@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:style/core/Consts/color_consts.dart';
 import 'package:style/core/utils/Api/api.dart';
 
 import 'package:style/features/Auth/data/Repo/Auth_Repo_Imp.dart';
@@ -37,12 +38,21 @@ class StyleLoom extends StatelessWidget {
               create: (context) =>
                   LoginCubit(AuthRepoImp(api: Api(dio: Dio()))),
             ),
-            BlocProvider(create: (context)=> FetchSubcategoryCubit(HomeRepoImp(api: Api(dio: Dio(),),),)..fetchSubCategory(mainId: 0)),
-            BlocProvider(create: (context)=> FetchProductModelCubit(HomeRepoImp(api: Api(dio: Dio(),),),)..fetchproductmodel(mainId: 0),),
+            BlocProvider(
+              create: (context) =>
+                  FetchSubcategoryCubit(HomeRepoImp(api: Api(dio: Dio())))
+                    ..fetchSubCategory(mainId: 0),
+            ),
+            BlocProvider(
+              create: (context) =>
+                  FetchProductModelCubit(HomeRepoImp(api: Api(dio: Dio())))
+                    ..fetchproductmodel(mainId: 0),
+            ),
           ],
           child: MaterialApp(
+            
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(fontFamily: "Roboto"),
+            theme: ThemeData(fontFamily: "Roboto",scaffoldBackgroundColor: Consts.black12),
             home: child,
           ),
         );

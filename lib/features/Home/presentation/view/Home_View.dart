@@ -47,8 +47,7 @@ class _HomeViewState extends State<HomeView> {
       // ✅ هنا استدعاء التبويبات
       body: Column(
         children: [
-        //  SizedBox(height: 30),
-
+          //  SizedBox(height: 30),
           SizedBox(height: 50),
           CarouselSection(),
           Expanded(child: CategoryTabSection()),
