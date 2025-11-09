@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:style/core/Consts/color_consts.dart';
+import 'package:style/core/Widgets/ButtonNavBar.dart';
 import 'package:style/features/Home/widgets/carousel_section.dart';
 import 'package:style/features/Home/widgets/category_tab_section.dart';
 
@@ -46,13 +47,13 @@ class _HomeViewState extends State<HomeView> {
       // ✅ هنا استدعاء التبويبات
       body: Column(
         children: [
-        //  SizedBox(height: 30),
-
+          //  SizedBox(height: 30),
           SizedBox(height: 50),
           CarouselSection(),
           Expanded(child: CategoryTabSection()),
         ],
       ),
+      bottomNavigationBar: Buttonnavbar(currentIndex: 0,),
     );
   }
 }
