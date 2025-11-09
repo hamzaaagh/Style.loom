@@ -82,6 +82,14 @@ class ProductModel extends Equatable {
 			reviews: reviews ?? this.reviews,
 		);
 	}
+ @override
+  // ignore: hash_and_equals
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is ProductModel && other.id == id;
+  }
+   @override
+  int get hashCode => id.hashCode;
 
 	@override
 	List<Object?> get props {
