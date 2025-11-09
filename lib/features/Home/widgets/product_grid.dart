@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:style/core/Widgets/Circular_Indector.dart';
 
 import 'package:style/features/Home/presentation/manager/fetch_product_cubit/fetch_product_model_cubit.dart';
 import 'package:style/features/Home/widgets/product_card.dart';
@@ -40,11 +41,7 @@ class ProductGrid extends StatelessWidget {
             );
           } else {
             return Center(
-              child: CircularProgressIndicator(
-                color: kDefaultIconLightColor,
-                backgroundColor: Colors.grey,
-                strokeWidth: 5,
-              ),
+              child: CircularIndector(),
             );
           }
         },
