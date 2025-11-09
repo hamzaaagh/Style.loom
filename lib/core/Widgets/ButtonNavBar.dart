@@ -9,11 +9,10 @@ import 'package:style/features/Favoraite/presentation/view/Favoraite_view.dart';
 import 'package:style/features/Home/presentation/view/Home_View.dart';
 
 class Buttonnavbar extends StatefulWidget {
-  Buttonnavbar({super.key});
-
+  Buttonnavbar({super.key, this.currentIndex = 0});
+  int currentIndex;
   @override
   State<Buttonnavbar> createState() => _ButtonnavbarState();
-  int currentIndex = 0;
 
   final icons = [
     HugeIcons.strokeRoundedHome07,
@@ -21,12 +20,7 @@ class Buttonnavbar extends StatefulWidget {
     HugeIcons.strokeRoundedFavourite,
     HugeIcons.strokeRoundedUserStory,
   ];
-  final Map<int, Widget> labels = {
-    0: HomeView(),
-    1: HomeView(),
-    2: FavoraiteView(),
-    3: HomeView(),
-  };
+  final labels = [HomeView(), HomeView(), FavoraiteView(), HomeView()];
 }
 
 class _ButtonnavbarState extends State<Buttonnavbar> {
@@ -41,12 +35,18 @@ class _ButtonnavbarState extends State<Buttonnavbar> {
           final active = widget.currentIndex == i;
 
           return InkWell(
-            onTap: () => setState(() {
+            onTap: () {
               widget.currentIndex = i;
-              Navigator.push(context, MaterialPageRoute(builder: (builder) {
-                return widget.labels.values.elementAt(active ? i : widget.currentIndex);
-              }));
-            }),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return widget.labels[i];
+                  },
+                ),
+              );
+              setState(() {});
+            },
             child: Container(
               padding: EdgeInsets.all(active ? 6 : 4),
               decoration: BoxDecoration(

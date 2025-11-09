@@ -53,7 +53,7 @@ class _HomeViewState extends State<HomeView> {
           Expanded(child: CategoryTabSection()),
         ],
       ),
-      bottomNavigationBar: Buttonnavbar(),
+      bottomNavigationBar: Buttonnavbar(currentIndex: 0,),
     );
   }
 }
