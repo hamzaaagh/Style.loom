@@ -25,7 +25,9 @@ class _ProductCardState extends State<ProductCard> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ProductDetailsView(),
+                // settings: RouteSettings(arguments: widget.product),
+                builder: (context) =>
+                    ProductDetailsView(product: widget.product),
               ),
             );
           },
