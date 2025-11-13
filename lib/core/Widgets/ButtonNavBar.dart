@@ -20,7 +20,7 @@ class Buttonnavbar extends StatefulWidget {
     HugeIcons.strokeRoundedFavourite,
     HugeIcons.strokeRoundedUserStory,
   ];
-  final labels = [HomeView(), HomeView(), FavoraiteView(), HomeView()];
+  final labels = [HomeView(), HomeView(), HomeView(), HomeView()];
 }
 
 class _ButtonnavbarState extends State<Buttonnavbar> {

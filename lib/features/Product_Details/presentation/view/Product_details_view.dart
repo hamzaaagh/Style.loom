@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:style/features/Product_Details/presentation/view/Widgets/Product_details_view_body.dart';
 
 class ProductDetailsView extends StatelessWidget {
@@ -7,8 +6,16 @@ class ProductDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(child: ProductDetailsViewBody()),
+    return const Scaffold(
+      body: SafeArea(
+        child: ProductDetailsViewBody(
+          imageUrl: "assets/images/fashion-shopping-friends-choice-clothes-600nw-2472680449.png",
+          productName: "Elegant Summer Dress",
+          mainCategory: "Women Fashion",
+          subCategory: "Dresses",
+          price: 89.99,
+        ),
+      ),
     );
   }
 }
