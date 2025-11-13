@@ -17,16 +17,11 @@ class CustomBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80)),
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.black26,
-        elevation: 3,
-      ),
+    return InkWell(
+      borderRadius: BorderRadius.circular(15),
+      onTap: onPressed,
       child: Ink(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
         decoration: BoxDecoration(
           border: Border.all(
             color: color == null ? Colors.white70 : Colors.white,
@@ -45,11 +40,12 @@ class CustomBottom extends StatelessWidget {
                   end: Alignment.centerRight,
                 )
               : LinearGradient(colors: [color!, color!]),
-          borderRadius: BorderRadius.circular(40),
+          borderRadius: BorderRadius.circular(15),
         ),
         child: Container(
+          //width: double.infinity,
           alignment: Alignment.center,
-          constraints: const BoxConstraints(minHeight: 48),
+          constraints: const BoxConstraints(minHeight: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
