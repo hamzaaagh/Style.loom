@@ -19,7 +19,7 @@ class RoundedIconButton extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: onPressed,
+        onTap:  onPressed,
         borderRadius: BorderRadius.circular(24),
         child: Container(
           width: 40,

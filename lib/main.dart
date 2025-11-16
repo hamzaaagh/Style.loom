@@ -14,7 +14,6 @@ import 'package:style/features/Auth/presentation/view/Log_in_screen/Login_View.d
 import 'package:style/features/Home/data/Repo/Home_Repo_Imp.dart';
 import 'package:style/features/Home/presentation/manager/fetch_Sub_Category_cubit/fetch_subcategory_cubit.dart';
 import 'package:style/features/Home/presentation/manager/fetch_product_cubit/fetch_product_model_cubit.dart';
-import 'package:style/features/Product_Details/presentation/view/Product_details_view.dart';
 
 void main() {
   runApp(const StyleLoom());
@@ -60,7 +59,7 @@ class StyleLoom extends StatelessWidget {
           ),
         );
       },
-      child: ProductDetailsView(), // ✅ صفحة البداية
+      child: LoginView(), // ✅ صفحة البداية
     );
   }
 }

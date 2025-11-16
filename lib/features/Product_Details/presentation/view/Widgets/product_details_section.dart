@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:style/core/Consts/color_consts.dart';
+import 'package:style/core/Models/product_model/product_model.dart';
+import 'package:style/core/Widgets/Custom_Bottom.dart';
+import 'package:style/features/Product_Details/presentation/view/Widgets/Custom_Expansion_Tile.dart';
 import 'package:style/features/Product_Details/presentation/view/Widgets/product_quantity_counter.dart';
 import 'package:style/features/Product_Details/presentation/view/Widgets/product_rating_stars.dart';
 
 class ProductDetailsSection extends StatelessWidget {
-  final String productName;
-  final String mainCategory;
-  final String subCategory;
-  final double price;
+  final ProductModel model;
 
-  const ProductDetailsSection({
-    super.key,
-    required this.productName,
-    required this.mainCategory,
-    required this.subCategory,
-    required this.price,
-  });
+  const ProductDetailsSection({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +19,9 @@ class ProductDetailsSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            productName,
+            model.name!,
             style: const TextStyle(
-              fontSize: 24,
+              fontSize: 35,
               fontWeight: FontWeight.bold,
               color: Consts.brown65,
             ),
@@ -38,24 +32,18 @@ class ProductDetailsSection extends StatelessWidget {
           Row(
             children: [
               Text(
-                mainCategory,
+                model.subCategory!.main!.name!,
                 style: const TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.w500,
                   color: Consts.brown70,
                 ),
               ),
-            ],
-          ),
-
-          const SizedBox(height: 4),
-
-          Row(
-            children: [
+              const SizedBox(width: 4),
               Text(
-                subCategory,
+                model.subCategory!.name!,
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 22,
                   fontWeight: FontWeight.w500,
                   color: Consts.brown70,
                 ),
@@ -66,7 +54,7 @@ class ProductDetailsSection extends StatelessWidget {
           const SizedBox(height: 16),
 
           Text(
-            "\$${price.toStringAsFixed(2)}",
+            "\$${model.price!.toStringAsFixed(2)}",
             style: const TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -100,10 +88,32 @@ class ProductDetailsSection extends StatelessWidget {
               // Handle quantity change if needed
             },
           ),
+          const SizedBox(height: 20),
+          CustomExpansionTile(
+            title: "Discreption",
+            longtitle: model.description!,
+          ),
+          CustomExpansionTile(title: "Reviews", longtitle: "hhhh"),
+          const SizedBox(height: 30),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CustomBottom(
+                color: Consts.black10,
+                text: "Add to Cart",
+                onPressed: () {},
+                icon: Icons.card_giftcard,
+              ),
+
+              CustomBottom(
+                text: "Buy Now",
+                onPressed: () {},
+                icon: Icons.shopping_bag,
+              ),
+            ],
+          ),
         ],
       ),
     );
   }
 }
-
-

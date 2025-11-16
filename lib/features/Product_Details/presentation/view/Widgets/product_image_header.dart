@@ -5,15 +5,15 @@ import 'rounded_icon_button.dart';
 class ProductImageHeader extends StatelessWidget {
   final String imageAssetPath;
   final bool isFavorite;
-  final VoidCallback onBack;
-  final VoidCallback onToggleFavorite;
+  // final VoidCallback onBack;
+  // final VoidCallback onToggleFavorite;
 
   const ProductImageHeader({
     super.key,
     required this.imageAssetPath,
-    required this.isFavorite,
-    required this.onBack,
-    required this.onToggleFavorite,
+    this.isFavorite = false,
+    // required this.onBack,
+    // required this.onToggleFavorite,
   });
 
   @override
@@ -65,13 +65,14 @@ class ProductImageHeader extends StatelessWidget {
                     icon: Icons.arrow_back_ios_new_rounded,
                     iconColor: Colors.white,
                     backgroundColor: Colors.black54,
-                    onPressed: onBack,
+                    onPressed: () =>
+                        Navigator.of(context, rootNavigator: true).pop(),
                   ),
                   RoundedIconButton(
                     icon: isFavorite ? Icons.favorite : Icons.favorite_border,
                     iconColor: isFavorite ? Colors.red : Colors.white,
                     backgroundColor: Colors.black54,
-                    onPressed: onToggleFavorite,
+                    onPressed: () {},
                   ),
                 ],
               ),
@@ -82,5 +83,3 @@ class ProductImageHeader extends StatelessWidget {
     );
   }
 }
-
-
