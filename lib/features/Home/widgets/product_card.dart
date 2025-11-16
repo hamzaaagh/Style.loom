@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:style/core/Consts/color_consts.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
-import 'package:style/features/Favoraite/presentation/manager/Fetch_Favoraite_Items_Cubit/fetch_favoraite_items_cubit.dart';
 import 'package:style/features/Product_Details/presentation/view/Product_details_view.dart';
 
 class ProductCard extends StatefulWidget {
@@ -16,10 +14,6 @@ class ProductCard extends StatefulWidget {
 class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FetchFavoraiteItemsCubit, FetchFavoraiteItemsState>(
-      builder: (context, state) {
-        final cubit = context.watch<FetchFavoraiteItemsCubit>();
-        final isFav = cubit.favoraiteProducts.contains(widget.product);
         return InkWell(
           onTap: () {
             Navigator.push(
@@ -67,11 +61,10 @@ class _ProductCardState extends State<ProductCard> {
                             padding: const EdgeInsets.all(8.0),
                             child: InkWell(
                               onTap: () {
-                                cubit.addToFavoraite(widget.product);
-                                setState(() {});
+                               
                               },
                               child: Icon(
-                                isFav ? Icons.favorite : Icons.favorite_border,
+                               Icons.favorite_border,
                                 color: Colors.red,
                                 size: 30,
                               ),
@@ -109,8 +102,6 @@ class _ProductCardState extends State<ProductCard> {
             ),
           ),
         );
-      },
-    );
   }
 }
 

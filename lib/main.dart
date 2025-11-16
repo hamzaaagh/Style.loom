@@ -9,12 +9,12 @@ import 'package:style/features/Auth/data/Repo/Auth_Repo_Imp.dart';
 import 'package:style/features/Auth/presentation/manager/Login_Cubit/login_cubit.dart';
 import 'package:style/features/Auth/presentation/manager/Register_Cubit/register_cubit.dart';
 import 'package:style/features/Auth/presentation/view/Log_in_screen/Login_View.dart';
-import 'package:style/features/Favoraite/data/Favoraite_repo_Imp.dart';
-import 'package:style/features/Favoraite/presentation/manager/Fetch_Favoraite_Items_Cubit/fetch_favoraite_items_cubit.dart';
+
 
 import 'package:style/features/Home/data/Repo/Home_Repo_Imp.dart';
 import 'package:style/features/Home/presentation/manager/fetch_Sub_Category_cubit/fetch_subcategory_cubit.dart';
 import 'package:style/features/Home/presentation/manager/fetch_product_cubit/fetch_product_model_cubit.dart';
+import 'package:style/features/Product_Details/presentation/view/Product_details_view.dart';
 
 void main() {
   runApp(const StyleLoom());
@@ -50,7 +50,7 @@ class StyleLoom extends StatelessWidget {
                   FetchProductModelCubit(HomeRepoImp(api: Api(dio: Dio())))
                     ..fetchproductmodel(mainId: 0),
             ),
-            BlocProvider(create: (context) => FetchFavoraiteItemsCubit(FavoraiteRepoImp())),
+          //  BlocProvider(create: (context) => FetchFavoraiteItemsCubit(FavoraiteRepoImp())),
           ],
           child: MaterialApp(
             
@@ -60,7 +60,7 @@ class StyleLoom extends StatelessWidget {
           ),
         );
       },
-      child: LoginView(), // ✅ صفحة البداية
+      child: ProductDetailsView(), // ✅ صفحة البداية
     );
   }
 }
