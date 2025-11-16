@@ -60,7 +60,7 @@ class StyleLoom extends StatelessWidget {
           ),
         );
       },
-      child: ProductDetailsView(), // ✅ صفحة البداية
+      child: LoginView(), // ✅ صفحة البداية
     );
   }
 }
