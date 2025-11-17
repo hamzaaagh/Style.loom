@@ -9,7 +9,9 @@ import 'package:style/features/Home/widgets/product_grid.dart';
 import 'package:style/features/Home/widgets/subcategory_bar.dart';
 
 class CategoryTabSection extends StatefulWidget {
-  const CategoryTabSection({super.key});
+  const CategoryTabSection({super.key, this.height});
+
+  final double? height;
 
   @override
   State<CategoryTabSection> createState() => _CategoryTabSectionState();
@@ -66,7 +68,8 @@ class _CategoryTabSectionState extends State<CategoryTabSection>
             ],
           ),
           const SizedBox(height: 8),
-          Expanded(
+          SizedBox(
+            height: widget.height ?? MediaQuery.of(context).size.height * 0.6,
             child: TabBarView(
               controller: tabController,
               children: [
@@ -103,9 +106,7 @@ class _CategoryTabSectionState extends State<CategoryTabSection>
             ),
           ),
         ),
-        Expanded(
-          child: ProductGrid(),
-        ),
+        Expanded(child: ProductGrid()),
       ],
     );
   }

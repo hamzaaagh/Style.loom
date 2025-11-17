@@ -14,6 +14,12 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
+    final availableHeight =
+        MediaQuery.of(context).size.height -
+        kToolbarHeight -
+        MediaQuery.of(context).padding.top -
+        kBottomNavigationBarHeight;
+
     return Scaffold(
       backgroundColor: Consts.black12,
       appBar: AppBar(
@@ -44,16 +50,20 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
 
-      // ✅ هنا استدعاء التبويبات
-      body: Column(
-        children: [
-          //  SizedBox(height: 30),
-          SizedBox(height: 50),
-          CarouselSection(),
-          Expanded(child: CategoryTabSection()),
-        ],
+      // ✅ Wrap whole content in a SingleChildScrollView and give the
+      // CategoryTabSection a bounded height to avoid unbounded constraints.
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 50),
+            CarouselSection(),
+            // pass a reasonable height for the tabs (uses availableHeight)
+            CategoryTabSection(height: availableHeight * 0.95),
+          ],
+        ),
       ),
-      bottomNavigationBar: Buttonnavbar(currentIndex: 0,),
+      bottomNavigationBar: Buttonnavbar(currentIndex: 0),
     );
   }
 }

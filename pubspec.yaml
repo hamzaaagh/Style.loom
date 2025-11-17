@@ -34,15 +34,15 @@ dependencies:
   dartz: ^0.10.1
   dio: ^5.9.0
   equatable: ^2.0.7
-  flutter_rating_bar: ^4.0.1
-
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  flutter_rating_bar: ^4.0.1
   flutter_screenutil: ^5.9.3
   get_it: ^8.2.0
   hugeicons: ^1.1.1
   ionicons: ^0.2.1
+  material_symbols_icons: ^4.2874.0
 
 dev_dependencies:
   flutter_lints: ^5.0.0
