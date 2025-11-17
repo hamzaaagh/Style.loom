@@ -14,14 +14,14 @@ class ProductDetailsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             model.name!,
             style: const TextStyle(
-              fontSize: 35,
+              fontSize: 25,
               fontWeight: FontWeight.bold,
               color: Consts.brown65,
             ),
@@ -34,18 +34,18 @@ class ProductDetailsSection extends StatelessWidget {
               Text(
                 model.subCategory!.main!.name!,
                 style: const TextStyle(
-                  fontSize: 25,
+                  fontSize: 18,
                   fontWeight: FontWeight.w500,
-                  color: Consts.brown70,
+                  color: Colors.grey,
                 ),
               ),
               const SizedBox(width: 4),
               Text(
                 model.subCategory!.name!,
                 style: const TextStyle(
-                  fontSize: 22,
+                  fontSize: 18,
                   fontWeight: FontWeight.w500,
-                  color: Consts.brown70,
+                  color: Colors.grey,
                 ),
               ),
             ],
@@ -54,11 +54,11 @@ class ProductDetailsSection extends StatelessWidget {
           const SizedBox(height: 16),
 
           Text(
-            "\$${model.price!.toStringAsFixed(2)}",
+            "\$ ${model.price!.toStringAsFixed(2)}",
             style: const TextStyle(
-              fontSize: 22,
+              fontSize: 25,
               fontWeight: FontWeight.bold,
-              color: Consts.brown60,
+              color: Consts.brown65,
             ),
           ),
           const SizedBox(height: 10),
@@ -68,11 +68,11 @@ class ProductDetailsSection extends StatelessWidget {
               const SizedBox(width: 5),
               const Text(
                 "(10)",
-                style: TextStyle(fontSize: 20, color: Consts.gray95),
+                style: TextStyle(fontSize: 20, color: Colors.grey),
               ),
             ],
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 15),
           const Text(
             "Select quantity:",
             style: TextStyle(
@@ -93,24 +93,56 @@ class ProductDetailsSection extends StatelessWidget {
             title: "Discreption",
             longtitle: model.description!,
           ),
-          CustomExpansionTile(title: "Reviews", longtitle: "hhhh"),
+          CustomExpansionTile(title: "Reviews", longtitle: "This is reviews "),
           const SizedBox(height: 30),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CustomBottom(
-                color: Consts.black10,
-                text: "Add to Cart",
-                onPressed: () {},
-                icon: Icons.card_giftcard,
-              ),
+          // Responsive buttons: side-by-side on wide screens, stacked on narrow
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final isNarrow = constraints.maxWidth < 360;
+              if (isNarrow) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    CustomBottom(
+                      color: Consts.black10,
+                      text: "Add to Cart",
+                      onPressed: () {},
+                      icon: Icons.card_giftcard,
+                    ),
+                    const SizedBox(height: 10),
+                    CustomBottom(
+                      text: "Buy Now",
+                      onPressed: () {},
+                      icon: Icons.shopping_bag,
+                    ),
+                  ],
+                );
+              }
 
-              CustomBottom(
-                text: "Buy Now",
-                onPressed: () {},
-                icon: Icons.shopping_bag,
-              ),
-            ],
+              return Row(
+                children: [
+                  // Give Add to Cart a slightly larger share of the width
+                  Expanded(
+                    flex: 1,
+                    child: CustomBottom(
+                      color: Consts.black10,
+                      text: "Add to Cart",
+                      onPressed: () {},
+                      icon: Icons.card_giftcard,
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    flex: 1,
+                    child: CustomBottom(
+                      text: "Buy Now",
+                      onPressed: () {},
+                      icon: Icons.shopping_bag,
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ],
       ),

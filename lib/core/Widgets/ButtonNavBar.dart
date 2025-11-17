@@ -27,6 +27,7 @@ class _ButtonnavbarState extends State<Buttonnavbar> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: MediaQuery.of(context).size.height * 0.07,
       padding: EdgeInsets.symmetric(vertical: 12),
       color: Consts.black12,
       child: Row(

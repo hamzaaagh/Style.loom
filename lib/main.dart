@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:style/core/Consts/color_consts.dart';
@@ -10,12 +11,15 @@ import 'package:style/features/Auth/presentation/manager/Login_Cubit/login_cubit
 import 'package:style/features/Auth/presentation/manager/Register_Cubit/register_cubit.dart';
 import 'package:style/features/Auth/presentation/view/Log_in_screen/Login_View.dart';
 
-
 import 'package:style/features/Home/data/Repo/Home_Repo_Imp.dart';
 import 'package:style/features/Home/presentation/manager/fetch_Sub_Category_cubit/fetch_subcategory_cubit.dart';
 import 'package:style/features/Home/presentation/manager/fetch_product_cubit/fetch_product_model_cubit.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Lock orientation to portrait up only for the whole app
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   runApp(const StyleLoom());
 }
 
@@ -49,12 +53,14 @@ class StyleLoom extends StatelessWidget {
                   FetchProductModelCubit(HomeRepoImp(api: Api(dio: Dio())))
                     ..fetchproductmodel(mainId: 0),
             ),
-          //  BlocProvider(create: (context) => FetchFavoraiteItemsCubit(FavoraiteRepoImp())),
+            //  BlocProvider(create: (context) => FetchFavoraiteItemsCubit(FavoraiteRepoImp())),
           ],
           child: MaterialApp(
-            
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(fontFamily: "Roboto",scaffoldBackgroundColor: Consts.black12),
+            theme: ThemeData(
+              fontFamily: "Roboto",
+              scaffoldBackgroundColor: Consts.black12,
+            ),
             home: child,
           ),
         );

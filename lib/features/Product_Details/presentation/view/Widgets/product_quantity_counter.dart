@@ -12,7 +12,7 @@ class ProductQuantityCounter extends StatefulWidget {
     this.initialQuantity = 1,
     this.onQuantityChanged,
     this.height = 45,
-    this.width = 140,
+    this.width = 130,
   });
 
   @override
@@ -64,16 +64,13 @@ class _ProductQuantityCounterState extends State<ProductQuantityCounter> {
           IconButton(
             onPressed: _decrease,
             icon: const Icon(Icons.remove_rounded),
-            color: Consts.black10
+            color: Consts.black10,
           ),
 
           // عرض العدد
           Text(
             '$quantity',
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
 
           // زر الإضافة

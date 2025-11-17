@@ -38,10 +38,10 @@ class ProductImageHeader extends StatelessWidget {
           ),
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(1),
-              bottomRight: Radius.circular(1),
+              bottomLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30),
             ),
-            child: Image.asset(
+            child: Image.network(
               imageAssetPath,
               fit: BoxFit.cover,
               width: double.infinity,
