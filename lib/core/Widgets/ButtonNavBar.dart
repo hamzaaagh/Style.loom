@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import 'package:style/core/Consts/color_consts.dart';
-import 'package:style/features/Favoraite/presentation/view/Favoraite_view.dart';
+
 import 'package:style/features/Home/presentation/view/Home_View.dart';
 
 class Buttonnavbar extends StatefulWidget {
@@ -48,14 +48,14 @@ class _ButtonnavbarState extends State<Buttonnavbar> {
               setState(() {});
             },
             child: Container(
-              padding: EdgeInsets.all(active ? 6 : 4),
+              padding: EdgeInsets.all(active ? 3 : 1),
               decoration: BoxDecoration(
                 color: active ? Consts.brown60 : Colors.transparent,
                 borderRadius: BorderRadius.circular(25),
               ),
               child: HugeIcon(
                 icon: widget.icons[i],
-                size: active ? 36 : 30,
+                size: active ? 30 : 20,
                 color: active ? Colors.black12 : Colors.white60,
               ),
             ),

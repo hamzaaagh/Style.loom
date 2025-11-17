@@ -9,9 +9,7 @@ import 'package:style/features/Home/widgets/product_grid.dart';
 import 'package:style/features/Home/widgets/subcategory_bar.dart';
 
 class CategoryTabSection extends StatefulWidget {
-  const CategoryTabSection({super.key, this.height});
-
-  final double? height;
+  const CategoryTabSection({super.key});
 
   @override
   State<CategoryTabSection> createState() => _CategoryTabSectionState();
@@ -68,17 +66,24 @@ class _CategoryTabSectionState extends State<CategoryTabSection>
             ],
           ),
           const SizedBox(height: 8),
-          SizedBox(
-            height: widget.height ?? MediaQuery.of(context).size.height * 0.6,
-            child: TabBarView(
-              controller: tabController,
-              children: [
-                _buildTabContent('All'),
-                _buildTabContent('Man'),
-                _buildTabContent('Woman'),
-                _buildTabContent('Kids'),
-              ],
-            ),
+          // Render the active tab's content directly so the whole Home can
+          // be a single vertically scrollable block (no nested scrolling).
+          AnimatedBuilder(
+            animation: tabController,
+            builder: (context, child) {
+              final index = tabController.index;
+              switch (index) {
+                case 1:
+                  return _buildTabContent('Man');
+                case 2:
+                  return _buildTabContent('Woman');
+                case 3:
+                  return _buildTabContent('Kids');
+                case 0:
+                default:
+                  return _buildTabContent('All');
+              }
+            },
           ),
         ],
       ),
@@ -106,7 +111,7 @@ class _CategoryTabSectionState extends State<CategoryTabSection>
             ),
           ),
         ),
-        Expanded(child: ProductGrid()),
+        ProductGrid(),
       ],
     );
   }

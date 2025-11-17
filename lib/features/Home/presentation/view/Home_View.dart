@@ -14,12 +14,9 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    final availableHeight =
-        MediaQuery.of(context).size.height -
-        kToolbarHeight -
-        MediaQuery.of(context).padding.top -
-        kBottomNavigationBarHeight;
-
+    // no fixed height calculation needed when the whole Home is one scrollable
+    // block; children will size themselves and the parent SingleChildScrollView
+    // will handle vertical scrolling.
     return Scaffold(
       backgroundColor: Consts.black12,
       appBar: AppBar(
@@ -58,8 +55,7 @@ class _HomeViewState extends State<HomeView> {
           children: [
             const SizedBox(height: 50),
             CarouselSection(),
-            // pass a reasonable height for the tabs (uses availableHeight)
-            CategoryTabSection(height: availableHeight * 0.95),
+            CategoryTabSection(),
           ],
         ),
       ),
