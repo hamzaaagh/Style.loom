@@ -3,6 +3,7 @@ import 'package:style/core/Consts/color_consts.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
 import 'package:style/core/Widgets/Custom_Bottom.dart';
 import 'package:style/features/Product_Details/presentation/view/Widgets/Custom_Expansion_Tile.dart';
+import 'package:style/features/Product_Details/presentation/view/Widgets/Similiar_Products_List_view.dart';
 import 'package:style/features/Product_Details/presentation/view/Widgets/product_quantity_counter.dart';
 import 'package:style/features/Product_Details/presentation/view/Widgets/product_rating_stars.dart';
 
@@ -13,6 +14,9 @@ class ProductDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // BlocProvider.of<FetchSimiliarItemCubit>(
+    //   context,
+    // ).fetchSimiliarproductsitem(product: model);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
       child: Column(
@@ -143,6 +147,22 @@ class ProductDetailsSection extends StatelessWidget {
                 ],
               );
             },
+          ),
+          const SizedBox(height: 25),
+          const Text(
+            "Similiar Products",
+            style:TextStyle(
+              color: Consts.brown70,
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: SizedBox(
+              height: 150,
+              child: SimiliarProductsListView(product: model),
+            ),
           ),
         ],
       ),

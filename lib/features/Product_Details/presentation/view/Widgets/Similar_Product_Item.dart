@@ -1,146 +1,160 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:style/core/Consts/color_consts.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
-import 'package:style/features/Favoraite/presentation/manager/Fetch_Favoraite_Items_Cubit/fetch_favoraite_items_cubit.dart';
 import 'package:style/features/Product_Details/presentation/view/Product_details_view.dart';
 
-class ProductCard extends StatefulWidget {
+class SimilarProductItem extends StatelessWidget {
   final ProductModel product;
-  const ProductCard({super.key, required this.product});
+  final VoidCallback? onTap;
 
-  @override
-  State<ProductCard> createState() => _ProductCardState();
-}
+  const SimilarProductItem({super.key, required this.product, this.onTap});
 
-class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FetchFavoraiteItemsCubit, FetchFavoraiteItemsState>(
-      builder: (context, state) {
-        final cubit = context.watch<FetchFavoraiteItemsCubit>();
-        final isFav = cubit.favoraiteProducts.contains(widget.product);
-        return InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                // settings: RouteSettings(arguments: widget.product),
-                builder: (context) =>
-                    ProductDetailsView(product: widget.product),
-              ),
-            );
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              color: const Color(0xFF1A1A1A),
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  // ignore: deprecated_member_use
-                  color: Colors.black.withOpacity(0.4),
-                  blurRadius: 6,
-                  offset: const Offset(0, 3),
-                ),
-              ],
+    final String? imagePath = product.imageUrl?.toString();
+    final String? fullImageUrl = imagePath != null
+        ? "http://10.3.73.102:3000$imagePath"
+        : null;
+
+    return Ink(
+      width: 120,
+          height: 150,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: () {
+          onTap?.call();
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (builder) => ProductDetailsView(product: product),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          );
+        },
+        child: Container(
+          width: 120,
+          height: 150,
+          margin: const EdgeInsets.only(right: 12),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.25),
+                blurRadius: 6,
+                offset: const Offset(0, 3),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Stack(
               children: [
-                Expanded(
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white10,
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(12),
-                      ),
-                    ),
-                    child: Center(
-                      child: Stack(
-                        alignment: Alignment.topRight,
-                        children: [
-                          Image.network(
-                            widget.product.imageUrl,
-                            fit: BoxFit.cover,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(
-                              onTap: () {
-                                cubit.addToFavoraite(widget.product);
-                                setState(() {});
-                              },
-                              child: Icon(
-                                isFav ? Icons.favorite : Icons.favorite_border,
-                                color: Colors.red,
-                                size: 30,
+                Positioned.fill(
+                  child: fullImageUrl != null
+                      ? Image.network(
+                          fullImageUrl,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              Container(
+                                color: Colors.grey[300],
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.broken_image,
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Container(
+                              color: Colors.grey[300],
+                              child: const Center(
+                                child: SizedBox(
+                                  width: 24,
+                                  height: 24,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        )
+                      : Container(
+                          color: Colors.grey[300],
+                          child: const Center(
+                            child: Icon(
+                              Icons.image_not_supported,
+                              color: Colors.black26,
                             ),
                           ),
+                        ),
+                ),
+                Positioned(
+                  top: 8,
+                  right: 8,
+                  child: InkWell(
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      padding: const EdgeInsets.all(3),
+                      child: const Icon(
+                        Icons.favorite_border,
+                        color: Colors.black,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 10,
+                    ),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        colors: [
+                          Colors.black.withOpacity(0.7),
+                          Colors.transparent,
                         ],
                       ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 10,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.product.name!,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          product.name ?? '',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 6),
-                      Text(
-                        "${widget.product.price.toString()}\$",
-                        style: TextStyle(color: Colors.white70, fontSize: 13),
-                      ),
-                    ],
+                        const SizedBox(height: 4),
+                        Text(
+                          product.price != null ? "${product.price}\$" : '-',
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-        );
-      },
-    );
-  }
-}
-
-class FavoriteIcon extends StatefulWidget {
-  FavoriteIcon({super.key});
-
-  @override
-  State<FavoriteIcon> createState() => _FavoriteIconState();
-}
-
-class _FavoriteIconState extends State<FavoriteIcon> {
-  IconData icon = Icons.favorite_border;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(40),
-        color: Consts.brown65,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(3),
-        child: InkWell(
-          onTap: () {
-            icon = Icons.favorite_border == icon
-                ? Icons.favorite
-                : Icons.favorite_border;
-            setState(() {});
-          },
-          child: Icon(icon, color: Colors.red, size: 30),
         ),
       ),
     );
