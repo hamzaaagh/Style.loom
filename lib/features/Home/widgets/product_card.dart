@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:style/core/Consts/color_consts.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
+import 'package:style/core/Widgets/Circular_Indector.dart';
 import 'package:style/features/Product_Details/presentation/view/Product_details_view.dart';
 
 class ProductCard extends StatefulWidget {
@@ -15,7 +16,7 @@ class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
     final String fullImageUrl =
-        "http://10.3.73.102:3000${widget.product.imageUrl}";
+        "http://10.159.59.136:3000${widget.product.imageUrl}";
 
     return InkWell(
       onTap: () {
@@ -65,7 +66,7 @@ class _ProductCardState extends State<ProductCard> {
                         child: SizedBox(
                           width: 24,
                           height: 24,
-                          child: CircularProgressIndicator(strokeWidth: 2),
+                          child: CircularIndector(),
                         ),
                       ),
                     );

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
@@ -36,32 +37,31 @@ class _SimiliarProductsListViewState extends State<SimiliarProductsListView> {
       builder: (context, state) {
         if (state is FetchSimiliarItemSucces) {
           final items = state.similiarproducts;
-
           if (items.isEmpty) {
             return SizedBox(
               height: 150,
-              child: const Center(child: Text('No similar items')),
+              child: const Center(child: Text("No Similiar Products !!",style: TextStyle(color: Colors.white,fontSize: 25),)),
+            );
+          } else {
+            return SizedBox(
+              height: 150,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: items.length,
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                itemBuilder: (context, index) {
+                  final product = items[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 12),
+                    child: SimilarProductItem(
+                      product: product,
+                      onTap: _stopScroll,
+                    ),
+                  );
+                },
+              ),
             );
           }
-
-          return SizedBox(
-            height: 150,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: items.length,
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              itemBuilder: (context, index) {
-                final product = items[index];
-                return Padding(
-                  padding: const EdgeInsets.only(right: 12),
-                  child: SimilarProductItem(
-                    product: product,
-                    onTap: _stopScroll,
-                  ),
-                );
-              },
-            ),
-          );
         } else {
           return Center(child: CircularIndector());
         }

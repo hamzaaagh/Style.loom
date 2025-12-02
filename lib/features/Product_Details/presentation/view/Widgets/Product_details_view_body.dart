@@ -20,13 +20,15 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody> {
   @override
   void initState() {
     super.initState();
-    fullImageUrl = "http://10.3.73.102:3000${widget.product.imageUrl}";
+    fullImageUrl = "http://10.159.59.136:3000${widget.product.imageUrl}";
     // The FetchSimiliarItemCubit is now provided by the parent
     // (ProductDetailsView). Trigger the fetch here so the UI updates
     // as soon as the details page opens.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       try {
-        context.read<FetchSimiliarItemCubit>().fetchSimiliarproductsitem(product: widget.product);
+        context.read<FetchSimiliarItemCubit>().fetchSimiliarproductsitem(
+          product: widget.product,
+        );
       } catch (_) {
         // If the cubit is not available for any reason, skip fetching.
       }

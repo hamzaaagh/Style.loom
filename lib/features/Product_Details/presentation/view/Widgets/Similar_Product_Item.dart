@@ -12,7 +12,7 @@ class SimilarProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final String? imagePath = product.imageUrl?.toString();
     final String? fullImageUrl = imagePath != null
-        ? "http://10.3.73.102:3000$imagePath"
+        ? "http://10.159.59.136:3000$imagePath"
         : null;
 
     return Ink(
