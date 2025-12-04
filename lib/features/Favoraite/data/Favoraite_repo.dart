@@ -5,6 +5,6 @@ import 'package:style/core/utils/errors/failurs.dart';
 
 abstract class FavoraiteRepo {
   Future<Either<Failurs,Response>> addToFavoraite(ProductModel product,int userId);
-  Future<void> removeFromFavoraite(ProductModel product);
+  Future<void> removeFromFavoraite(ProductModel product,int userId);
   Future<List<ProductModel>> getFavoraiteItems();
 }

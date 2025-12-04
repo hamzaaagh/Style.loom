@@ -46,8 +46,32 @@ class FavoraiteRepoImp implements FavoraiteRepo {
   }
 
   @override
-  Future<void> removeFromFavoraite(ProductModel product) {
-    // TODO: implement removeFromFavoraite
-    throw UnimplementedError();
+  Future<Either<Failurs, Response>> removeFromFavoraite(
+    ProductModel product,
+    int userId,
+  ) async {
+    try {
+      var response = await api.delete(
+        data: {"userId": userId, "productId": product.id},
+        baseUrl: "http://localhost:3000/api/product/",
+        type: "removeFavorite",
+      );
+      if (response.statusCode == 200) {
+        favoraiteItems.remove(product);
+        return right(response);
+      } else {
+        return left(
+          Serverfailur(
+            errormessage: "Failed to remove favoriate ${response.statusCode}",
+          ),
+        );
+      }
+    } catch (e) {
+      if (e is DioException) {
+        return left(Serverfailur.fromDioexaption(e));
+      }
+    }
+    return left(Serverfailur(errormessage: "Something went wrong"));
   }
+
 }
