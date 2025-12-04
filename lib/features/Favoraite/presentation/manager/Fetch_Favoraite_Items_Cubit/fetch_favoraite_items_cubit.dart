@@ -10,28 +10,6 @@ class FetchFavoraiteItemsCubit extends Cubit<FetchFavoraiteItemsState> {
   FetchFavoraiteItemsCubit(this.favoraiteRepoImp)
     : super(FetchFavoraiteItemsInitial());
   List<ProductModel> favoraiteProducts = [];
-  void addToFavoraite(ProductModel product) {
-    try {
-      if (favoraiteRepoImp.isFav(product)) {
-        favoraiteRepoImp.removeFromFavoraite(product);
-      } else {
-        favoraiteRepoImp.addToFavoraite(product);
-      }
-
-      favoraiteProducts = favoraiteRepoImp.getFavoraiteItems();
-      emit(FetchFavoraiteItemsSucces(products: favoraiteProducts));
-    } catch (e) {
-      emit(FetchFavoraiteItemsFailure(errmessage: e.toString()));
-    }
+ 
   }
 
-  void getFavoraiteItems() {
-    emit(FetchFavoraiteItemsloading());
-    try {
-      favoraiteProducts = favoraiteRepoImp.getFavoraiteItems();
-      emit(FetchFavoraiteItemsSucces(products: favoraiteProducts));
-    } catch (e) {
-      emit(FetchFavoraiteItemsFailure(errmessage: e.toString()));
-    }
-  }
-}

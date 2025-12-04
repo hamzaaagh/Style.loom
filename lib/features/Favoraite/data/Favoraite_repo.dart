@@ -1,7 +1,10 @@
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
+import 'package:style/core/utils/errors/failurs.dart';
 
 abstract class FavoraiteRepo {
-  void addToFavoraite(ProductModel product);
-  void removeFromFavoraite(ProductModel product);
-  List<ProductModel> getFavoraiteItems();
+  Future<Either<Failurs,Response>> addToFavoraite(ProductModel product,int userId);
+  Future<void> removeFromFavoraite(ProductModel product);
+  Future<List<ProductModel>> getFavoraiteItems();
 }
