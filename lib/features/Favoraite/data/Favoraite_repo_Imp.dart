@@ -73,5 +73,4 @@ class FavoraiteRepoImp implements FavoraiteRepo {
     }
     return left(Serverfailur(errormessage: "Something went wrong"));
   }
-
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:style/core/Consts/const_Ip_Adress.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
 import 'package:style/features/Product_Details/presentation/view/Product_details_view.dart';
 
@@ -12,7 +13,7 @@ class SimilarProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final String? imagePath = product.imageUrl?.toString();
     final String? fullImageUrl = imagePath != null
-        ? "http://10.159.59.136:3000$imagePath"
+        ? "http://${IPconsts.ipadress}:3000$imagePath"
         : null;
 
     return Ink(

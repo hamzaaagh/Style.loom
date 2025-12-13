@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:style/core/Consts/const_Ip_Adress.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
 
 import 'package:style/features/Product_Details/presentation/manager/Fetch_Similiar_Item_Cubit/fetch_similiar_item_cubit.dart';
@@ -20,7 +21,7 @@ class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody> {
   @override
   void initState() {
     super.initState();
-    fullImageUrl = "http://10.159.59.136:3000${widget.product.imageUrl}";
+    fullImageUrl = "http://${IPconsts.ipadress}:3000${widget.product.imageUrl}";
     // The FetchSimiliarItemCubit is now provided by the parent
     // (ProductDetailsView). Trigger the fetch here so the UI updates
     // as soon as the details page opens.
