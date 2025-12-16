@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:style/core/Consts/color_consts.dart';
+
 import 'package:style/core/Consts/const_Ip_Adress.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
 import 'package:style/core/Widgets/Circular_Indector.dart';
+import 'package:style/core/Widgets/Favoraite_Icon_Btt.dart';
 import 'package:style/features/Product_Details/presentation/view/Product_details_view.dart';
 
 class ProductCard extends StatefulWidget {
@@ -88,13 +89,8 @@ class _ProductCardState extends State<ProductCard> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(3),
-                      child: const Icon(
-                        Icons.favorite_border,
-                        color: Colors.black,
-                        size: 20,
-                        //weight: 0.1,
-                        fontWeight: FontWeight.normal,
-                      ),
+                      child: FavoriteIcon(product: widget.product,),
+                       
                     ),
                   ),
                 ),
@@ -151,35 +147,35 @@ class _ProductCardState extends State<ProductCard> {
   }
 }
 
-class FavoriteIcon extends StatefulWidget {
-  FavoriteIcon({super.key});
+// class FavoriteIcon extends StatefulWidget {
+//   FavoriteIcon({super.key});
 
-  @override
-  State<FavoriteIcon> createState() => _FavoriteIconState();
-}
+//   @override
+//   State<FavoriteIcon> createState() => _FavoriteIconState();
+// }
 
-class _FavoriteIconState extends State<FavoriteIcon> {
-  IconData icon = Icons.favorite_border;
+// class _FavoriteIconState extends State<FavoriteIcon> {
+//   IconData icon = Icons.favorite_border;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(40),
-        color: Consts.brown65,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(3),
-        child: InkWell(
-          onTap: () {
-            icon = Icons.favorite_border == icon
-                ? Icons.favorite
-                : Icons.favorite_border;
-            setState(() {});
-          },
-          child: Icon(icon, color: Colors.red, size: 30),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(40),
+//         color: Consts.brown65,
+//       ),
+//       child: Padding(
+//         padding: const EdgeInsets.all(3),
+//         child: InkWell(
+//           onTap: () {
+//             icon = Icons.favorite_border == icon
+//                 ? Icons.favorite
+//                 : Icons.favorite_border;
+//             setState(() {});
+//           },
+//           child: Icon(icon, color: Colors.red, size: 30),
+//         ),
+//       ),
+//     );
+//   }
+// }

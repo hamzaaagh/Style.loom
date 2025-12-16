@@ -9,6 +9,8 @@ import 'package:style/core/utils/Api/api.dart';
 import 'package:style/features/Auth/data/Repo/Auth_Repo_Imp.dart';
 import 'package:style/features/Auth/presentation/manager/Login_Cubit/login_cubit.dart';
 import 'package:style/features/Auth/presentation/manager/Register_Cubit/register_cubit.dart';
+import 'package:style/features/Favoraite/data/Favoraite_repo_Imp.dart';
+import 'package:style/features/Favoraite/presentation/manager/Add_To_Favoraite_Cubit/add_to_favoraite_cubit.dart';
 
 
 import 'package:style/features/Home/data/Repo/Home_Repo_Imp.dart';
@@ -55,6 +57,7 @@ class StyleLoom extends StatelessWidget {
                     ..fetchproductmodel(mainId: 0),
             ),
             //  BlocProvider(create: (context) => FetchFavoraiteItemsCubit(FavoraiteRepoImp())),
+            BlocProvider(create: (context) => AddToFavoraiteCubit(FavoraiteRepoImp(api: Api(dio: Dio()))))
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

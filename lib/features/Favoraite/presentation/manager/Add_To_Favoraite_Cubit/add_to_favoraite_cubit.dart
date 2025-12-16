@@ -17,7 +17,7 @@ class AddToFavoraiteCubit extends Cubit<AddToFavoraiteState> {
 
     result.fold(
       (failure) => emit(AddToFavoraiteFailure(failure.errormessage)),
-      (response) => emit(AddToFavoraiteSuccess()),
+      (_) => emit(AddToFavoraiteSuccess()),
     );
   }
 }

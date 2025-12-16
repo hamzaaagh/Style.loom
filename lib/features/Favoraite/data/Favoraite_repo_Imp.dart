@@ -11,7 +11,7 @@ class FavoraiteRepoImp implements FavoraiteRepo {
 
   FavoraiteRepoImp({required this.api});
   @override
-  Future<Either<Failurs, Response>> addToFavoraite(
+  Future<Either<Failurs, void>> addToFavoraite(
     ProductModel product,
     int userId,
   ) async {
@@ -23,7 +23,7 @@ class FavoraiteRepoImp implements FavoraiteRepo {
       );
       if (response.statusCode == 200) {
         favoraiteItems.add(product);
-        return right(response);
+         return right(null);
       } else {
         return left(
           Serverfailur(
@@ -40,13 +40,33 @@ class FavoraiteRepoImp implements FavoraiteRepo {
   }
 
   @override
-  Future<List<ProductModel>> getFavoraiteItems() {
-    // TODO: implement getFavoraiteItems
-    throw UnimplementedError();
+  Future<Either<Failurs, List<ProductModel>>> getFavoraiteItems(int id) async {
+    try {
+  var response = await api.get(endpoint: "getFavoritesById?userId=$id");
+  if (response.statusCode == 200) {
+    favoraiteItems.clear();
+    for (var item in response.data) {
+      favoraiteItems.add(ProductModel.fromJson(item));
+      
+    }
+    return right(favoraiteItems);
+  } else {
+    return left(
+      Serverfailur(
+        errormessage: "Failed to fetch favoriate list ${response.statusCode}",
+      ),
+    );
+  }
+}  catch (e) {
+    if (e is DioException) {
+      return left(Serverfailur.fromDioexaption(e));
+    }
+  }
+  return left(Serverfailur(errormessage: "Something went wrong"));
   }
 
   @override
-  Future<Either<Failurs, Response>> removeFromFavoraite(
+  Future<Either<Failurs, void>> removeFromFavoraite(
     ProductModel product,
     int userId,
   ) async {
@@ -57,8 +77,8 @@ class FavoraiteRepoImp implements FavoraiteRepo {
         type: "removeFavorite",
       );
       if (response.statusCode == 200) {
-        favoraiteItems.remove(product);
-        return right(response);
+        favoraiteItems.removeWhere((item) => item.id == product.id);
+         return right(null);
       } else {
         return left(
           Serverfailur(
