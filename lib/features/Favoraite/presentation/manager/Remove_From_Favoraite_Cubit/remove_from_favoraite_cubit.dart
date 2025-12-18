@@ -10,13 +10,13 @@ class RemoveFromFavoraiteCubit extends Cubit<RemoveFromFavoraiteState> {
 
   RemoveFromFavoraiteCubit(this.repo) : super(RemoveFavoraiteInitial());
 
-  Future<void> removefromfavoraite(ProductModel product,int userId) async {
+  Future<void> removefromfavoraite(ProductModel product, int userId) async {
     emit(RemoveFavoraiteLoading());
 
-      final result = await repo.removeFromFavoraite(product, userId);
+    final result = await repo.removeFromFavoraite(product, userId);
     result.fold(
-    (failure) => emit(RemoveFavoraiteFailure(failure.errormessage)),
-    (_) => emit(RemoveFavoraiteSuccess()),
-  );
+      (failure) => emit(RemoveFavoraiteFailure(failure.errormessage)),
+      (_) => emit(RemoveFavoraiteSuccess()),
+    );
   }
 }

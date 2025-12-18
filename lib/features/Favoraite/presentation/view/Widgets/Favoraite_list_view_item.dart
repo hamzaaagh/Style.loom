@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:style/core/Consts/color_consts.dart';
 
 class FavoraiteListViewItem extends StatelessWidget {
@@ -13,13 +13,15 @@ class FavoraiteListViewItem extends StatelessWidget {
         child: Container(
           height: MediaQuery.of(context).size.height * 0.15,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18),
-            gradient: LinearGradient(
-              colors: [Consts.gray40, Consts.gray50, Consts.gray70],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            //color: Consts.gray40,
+            color: Color(0xFF1E1E1E),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.4),
+                blurRadius: 8,
+                offset: Offset(0, 4),
+              ),
+            ],
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -57,18 +59,18 @@ class FavoraiteListViewItem extends StatelessWidget {
                     ),
                     Text(
                       "22 \$",
-                      style: TextStyle(color: Colors.white, fontSize: 14),
+                      style: TextStyle(color: Consts.brown60, fontSize: 14),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 8),
                     // مو موجودين
-                    Text(
-                      "Size : XL",
-                      style: TextStyle(color: Colors.white, fontSize: 15),
-                    ),
-                    Text(
-                      "Color : White",
-                      style: TextStyle(color: Colors.white, fontSize: 15),
-                    ),
+                    // Text(
+                    //   "Size : XL",
+                    //   style: TextStyle(color: Colors.white, fontSize: 15),
+                    // ),
+                    // Text(
+                    //   "Color : White",
+                    //   style: TextStyle(color: Colors.white, fontSize: 15),
+                    // ),
                   ],
                 ),
               ),
@@ -78,9 +80,12 @@ class FavoraiteListViewItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.shopping_cart_checkout, color: Consts.black15),
+                    Icon(Icons.shopping_cart_checkout, color: Consts.brown60),
                     Spacer(),
-                    Icon(Icons.do_disturb_on_outlined, color: Colors.red),
+                    Icon(
+                      Icons.do_disturb_on_outlined,
+                      color: Color(0xFFE74C3C),
+                    ),
                   ],
                 ),
               ),
