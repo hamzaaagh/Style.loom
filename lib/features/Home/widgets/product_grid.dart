@@ -20,13 +20,13 @@ class ProductGrid extends StatelessWidget {
     // }
 
     return Container(
-      height: MediaQuery.of(context).size.height * 0.01,
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       child: BlocBuilder<FetchProductModelCubit, FetchProductModelState>(
         builder: (context, state) {
-          print(state);
           if (state is FetchProductModelSucces) {
             return GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
               itemCount: state.products.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
@@ -40,9 +40,7 @@ class ProductGrid extends StatelessWidget {
               },
             );
           } else {
-            return Center(
-              child: CircularIndector(),
-            );
+            return const Center(child: CircularIndector());
           }
         },
       ),

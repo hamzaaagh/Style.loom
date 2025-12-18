@@ -14,6 +14,9 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
+    // no fixed height calculation needed when the whole Home is one scrollable
+    // block; children will size themselves and the parent SingleChildScrollView
+    // will handle vertical scrolling.
     return Scaffold(
       backgroundColor: Consts.black12,
       appBar: AppBar(
@@ -44,16 +47,19 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
 
-      // ✅ هنا استدعاء التبويبات
-      body: Column(
-        children: [
-          //  SizedBox(height: 30),
-          SizedBox(height: 50),
-          CarouselSection(),
-          Expanded(child: CategoryTabSection()),
-        ],
+      // ✅ Wrap whole content in a SingleChildScrollView and give the
+      // CategoryTabSection a bounded height to avoid unbounded constraints.
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 50),
+            CarouselSection(),
+            CategoryTabSection(),
+          ],
+        ),
       ),
-      bottomNavigationBar: Buttonnavbar(currentIndex: 0,),
+      bottomNavigationBar: Buttonnavbar(currentIndex: 0),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:style/core/Consts/color_consts.dart';
+
 import 'package:style/features/Home/presentation/manager/fetch_Sub_Category_cubit/fetch_subcategory_cubit.dart';
 import 'package:style/features/Home/presentation/manager/fetch_product_cubit/fetch_product_model_cubit.dart';
 import 'package:style/features/Home/widgets/product_grid.dart';
@@ -65,16 +66,24 @@ class _CategoryTabSectionState extends State<CategoryTabSection>
             ],
           ),
           const SizedBox(height: 8),
-          Expanded(
-            child: TabBarView(
-              controller: tabController,
-              children: [
-                _buildTabContent('All'),
-                _buildTabContent('Man'),
-                _buildTabContent('Woman'),
-                _buildTabContent('Kids'),
-              ],
-            ),
+          // Render the active tab's content directly so the whole Home can
+          // be a single vertically scrollable block (no nested scrolling).
+          AnimatedBuilder(
+            animation: tabController,
+            builder: (context, child) {
+              final index = tabController.index;
+              switch (index) {
+                case 1:
+                  return _buildTabContent('Man');
+                case 2:
+                  return _buildTabContent('Woman');
+                case 3:
+                  return _buildTabContent('Kids');
+                case 0:
+                default:
+                  return _buildTabContent('All');
+              }
+            },
           ),
         ],
       ),
@@ -102,9 +111,7 @@ class _CategoryTabSectionState extends State<CategoryTabSection>
             ),
           ),
         ),
-        Expanded(
-          child: ProductGrid(),
-        ),
+        ProductGrid(),
       ],
     );
   }

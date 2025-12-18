@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:style/core/Consts/color_consts.dart';
-
 import 'package:style/core/Widgets/ButtonNavBar.dart';
-import 'package:style/features/Favoraite/presentation/view/Widgets/Favoraite_View_Body.dart';
+import 'package:style/features/Cart/presentation/View/Widgets/Cart_View_Body.dart';
 
-class FavoraiteView extends StatelessWidget {
-  const FavoraiteView({super.key});
+class CartView extends StatelessWidget {
+  const CartView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +14,18 @@ class FavoraiteView extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Consts.black12,
-          title: const Text(
-            'WishList',
+          centerTitle: true,
+          title: Text(
+            "Cart",
             style: TextStyle(
               color: Consts.brown70,
+              //fontSize: 25,
               fontWeight: FontWeight.bold,
             ),
           ),
-          centerTitle: true,
         ),
-        body: FavoraiteViewBody(),
-        bottomNavigationBar: Buttonnavbar(currentIndex: 2),
+        body: const CartViewBody(),
+        bottomNavigationBar: Buttonnavbar(currentIndex: 1),
       ),
     );
   }

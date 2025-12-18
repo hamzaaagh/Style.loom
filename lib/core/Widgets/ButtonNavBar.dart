@@ -5,7 +5,9 @@ import 'package:flutter/widgets.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import 'package:style/core/Consts/color_consts.dart';
+import 'package:style/features/Cart/presentation/View/Cart_View.dart';
 import 'package:style/features/Favoraite/presentation/view/Favoraite_view.dart';
+
 import 'package:style/features/Home/presentation/view/Home_View.dart';
 
 class Buttonnavbar extends StatefulWidget {
@@ -20,13 +22,14 @@ class Buttonnavbar extends StatefulWidget {
     HugeIcons.strokeRoundedFavourite,
     HugeIcons.strokeRoundedUserStory,
   ];
-  final labels = [HomeView(), HomeView(), FavoraiteView(), HomeView()];
+  final labels = [HomeView(), CartView(), FavoraiteView(), HomeView()];
 }
 
 class _ButtonnavbarState extends State<Buttonnavbar> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: MediaQuery.of(context).size.height * 0.07,
       padding: EdgeInsets.symmetric(vertical: 12),
       color: Consts.black12,
       child: Row(
@@ -48,14 +51,14 @@ class _ButtonnavbarState extends State<Buttonnavbar> {
               setState(() {});
             },
             child: Container(
-              padding: EdgeInsets.all(active ? 6 : 4),
+              padding: EdgeInsets.all(active ? 3 : 1),
               decoration: BoxDecoration(
                 color: active ? Consts.brown60 : Colors.transparent,
                 borderRadius: BorderRadius.circular(25),
               ),
               child: HugeIcon(
                 icon: widget.icons[i],
-                size: active ? 36 : 30,
+                size: active ? 30 : 20,
                 color: active ? Colors.black12 : Colors.white60,
               ),
             ),

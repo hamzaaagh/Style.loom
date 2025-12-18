@@ -11,13 +11,8 @@ class CarouselSection extends StatefulWidget {
 
 class _CarouselSectionState extends State<CarouselSection> {
   final List<String> images = [
-   // هون ضيف صور يا جحش
-   
-   // انتاك ابو نظير
-   
-  
-  "asset/images/Best+Online+Boutiques.png",
-  "asset/images/fashion-shopping-friends-choice-clothes-600nw-2472680449.png"
+    "asset/images/Best+Online+Boutiques.png",
+    "asset/images/fashion-shopping-friends-choice-clothes-600nw-2472680449.png",
   ];
 
   int _currentIndex = 0;
@@ -37,7 +32,7 @@ class _CarouselSectionState extends State<CarouselSection> {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.network(
+                child: Image.asset(
                   images[index],
                   fit: BoxFit.cover,
                   width: double.infinity,

@@ -26,7 +26,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 200),
+      duration: const Duration(microseconds: 300),
     );
   }
 
@@ -48,20 +48,20 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 4),
       child: ExpansionTile(
         collapsedShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(8),
         ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         expandedAlignment: Alignment.centerLeft,
         title: Text(
           widget.title,
-          style: TextStyle(color: Colors.white, fontSize: 23),
+          style: TextStyle(color: Colors.white, fontSize: 18),
         ),
-        collapsedBackgroundColor: Consts.black25,
+        collapsedBackgroundColor: Consts.gray50,
         onExpansionChanged: _handleTap,
-        backgroundColor: Consts.black25,
+        backgroundColor: Consts.gray50,
         collapsedIconColor: Colors.white,
         trailing: RotationTransition(
           turns: Tween(begin: 0.0, end: 0.25).animate(_controller),
