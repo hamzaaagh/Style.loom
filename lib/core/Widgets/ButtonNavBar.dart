@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import 'package:style/core/Consts/color_consts.dart';
+import 'package:style/features/Cart/presentation/View/Cart_View.dart';
 import 'package:style/features/Favoraite/presentation/view/Favoraite_view.dart';
 
 import 'package:style/features/Home/presentation/view/Home_View.dart';
@@ -21,7 +22,7 @@ class Buttonnavbar extends StatefulWidget {
     HugeIcons.strokeRoundedFavourite,
     HugeIcons.strokeRoundedUserStory,
   ];
-  final labels = [HomeView(), HomeView(), FavoraiteView(), HomeView()];
+  final labels = [HomeView(), CartView(), FavoraiteView(), HomeView()];
 }
 
 class _ButtonnavbarState extends State<Buttonnavbar> {

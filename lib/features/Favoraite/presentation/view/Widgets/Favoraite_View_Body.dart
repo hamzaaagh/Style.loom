@@ -49,35 +49,31 @@ class _FavoraiteViewBodyState extends State<FavoraiteViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.builder(
-            controller: _scrollController,
-            itemCount: 10,
+    return SingleChildScrollView(
+      physics: AlwaysScrollableScrollPhysics(),
+      child: Column(
+        children: [
+          ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+
+            itemCount: 12,
             itemBuilder: (context, index) {
               return const FavoraiteListViewItem();
             },
           ),
-        ),
 
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 250),
-          child: _showButton
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 15, vertical: 10),
-                  child: CustomBottom(
-                    key: const ValueKey('bottom_button'),
-                    text: "Add All To Cart",
-                    onPressed: () {},
-                    icon: Icons.shopping_cart,
-                  ),
-                )
-              : const SizedBox.shrink(),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            child: CustomBottom(
+             
+              text: "Add All To Cart",
+              onPressed: () {},
+              icon: Icons.shopping_cart,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
-
