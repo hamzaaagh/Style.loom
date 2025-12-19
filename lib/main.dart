@@ -9,6 +9,7 @@ import 'package:style/core/utils/Api/api.dart';
 import 'package:style/features/Auth/data/Repo/Auth_Repo_Imp.dart';
 import 'package:style/features/Auth/presentation/manager/Login_Cubit/login_cubit.dart';
 import 'package:style/features/Auth/presentation/manager/Register_Cubit/register_cubit.dart';
+import 'package:style/core/Widgets/Main_Layout.dart';
 import 'package:style/features/Favoraite/data/Favoraite_repo_Imp.dart';
 import 'package:style/features/Favoraite/presentation/manager/Add_To_Favoraite_Cubit/add_to_favoraite_cubit.dart';
 
@@ -16,7 +17,7 @@ import 'package:style/features/Favoraite/presentation/manager/Add_To_Favoraite_C
 import 'package:style/features/Home/data/Repo/Home_Repo_Imp.dart';
 import 'package:style/features/Home/presentation/manager/fetch_Sub_Category_cubit/fetch_subcategory_cubit.dart';
 import 'package:style/features/Home/presentation/manager/fetch_product_cubit/fetch_product_model_cubit.dart';
-import 'package:style/features/Home/presentation/view/Home_View.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -69,7 +70,7 @@ class StyleLoom extends StatelessWidget {
           ),
         );
       },
-      child: HomeView(), // ✅ صفحة البداية
+      child: MainLayout(), // ✅ صفحة البداية
     );
   }
 }

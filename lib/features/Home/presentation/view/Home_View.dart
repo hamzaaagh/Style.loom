@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:style/core/Consts/color_consts.dart';
-import 'package:style/core/Widgets/ButtonNavBar.dart';
-import 'package:style/features/Home/widgets/carousel_section.dart';
-import 'package:style/features/Home/widgets/category_tab_section.dart';
+
+
+import 'package:style/features/Home/widgets/Home_View_Body.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
+  
 
   @override
   State<HomeView> createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> {
+  
+
+ 
+  
   @override
   Widget build(BuildContext context) {
     // no fixed height calculation needed when the whole Home is one scrollable
@@ -47,19 +52,8 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
 
-      // ✅ Wrap whole content in a SingleChildScrollView and give the
-      // CategoryTabSection a bounded height to avoid unbounded constraints.
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 50),
-            CarouselSection(),
-            CategoryTabSection(),
-          ],
-        ),
-      ),
-      bottomNavigationBar: Buttonnavbar(currentIndex: 0),
+      body: HomeViewBody(),
+    
     );
   }
 }

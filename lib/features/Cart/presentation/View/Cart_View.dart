@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:style/core/Consts/color_consts.dart';
-import 'package:style/core/Widgets/ButtonNavBar.dart';
+
 import 'package:style/features/Cart/presentation/View/Widgets/Cart_View_Body.dart';
 
-class CartView extends StatelessWidget {
+class CartView extends StatefulWidget {
   const CartView({super.key});
 
+  @override
+  State<CartView> createState() => _CartViewState();
+}
+
+class _CartViewState extends State<CartView> {
+//  int _currentIndex = 1;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,7 +31,7 @@ class CartView extends StatelessWidget {
           ),
         ),
         body: const CartViewBody(),
-        bottomNavigationBar: Buttonnavbar(currentIndex: 1),
+       
       ),
     );
   }

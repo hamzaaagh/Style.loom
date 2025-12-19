@@ -1,31 +1,18 @@
 // ignore_for_file: must_be_immutable
 
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import 'package:style/core/Consts/color_consts.dart';
-import 'package:style/features/Cart/presentation/View/Cart_View.dart';
-import 'package:style/features/Favoraite/presentation/view/Favoraite_view.dart';
 
-import 'package:style/features/Home/presentation/view/Home_View.dart';
 
-class Buttonnavbar extends StatefulWidget {
-  Buttonnavbar({super.key, this.currentIndex = 0});
+class Buttonnavbar extends StatelessWidget {
+  Buttonnavbar({super.key, this.currentIndex = 0,required this.onTap});
   int currentIndex;
-  @override
-  State<Buttonnavbar> createState() => _ButtonnavbarState();
-
-  final icons = [
-    HugeIcons.strokeRoundedHome07,
-    HugeIcons.strokeRoundedShoppingCart02,
-    HugeIcons.strokeRoundedFavourite,
-    HugeIcons.strokeRoundedUserStory,
-  ];
-  final labels = [HomeView(), CartView(), FavoraiteView(), HomeView()];
-}
-
-class _ButtonnavbarState extends State<Buttonnavbar> {
+  final ValueChanged<int> onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,22 +21,11 @@ class _ButtonnavbarState extends State<Buttonnavbar> {
       color: Consts.black12,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: List.generate(widget.icons.length, (i) {
-          final active = widget.currentIndex == i;
+        children: List.generate(icons.length, (i) {
+          final active = currentIndex == i;
 
           return InkWell(
-            onTap: () {
-              widget.currentIndex = i;
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return widget.labels[i];
-                  },
-                ),
-              );
-              setState(() {});
-            },
+            onTap: () => onTap(i),
             child: Container(
               padding: EdgeInsets.all(active ? 3 : 1),
               decoration: BoxDecoration(
@@ -57,7 +33,7 @@ class _ButtonnavbarState extends State<Buttonnavbar> {
                 borderRadius: BorderRadius.circular(25),
               ),
               child: HugeIcon(
-                icon: widget.icons[i],
+                icon: icons[i],
                 size: active ? 30 : 20,
                 color: active ? Colors.black12 : Colors.white60,
               ),
@@ -67,4 +43,12 @@ class _ButtonnavbarState extends State<Buttonnavbar> {
       ),
     );
   }
+
+  final icons = [
+    HugeIcons.strokeRoundedHome07,
+    HugeIcons.strokeRoundedShoppingCart02,
+    HugeIcons.strokeRoundedFavourite,
+    HugeIcons.strokeRoundedUserStory,
+  ];
+ // final labels = [HomeView(), CartView(), FavoraiteView(), HomeView()];
 }
