@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:style/core/Consts/color_consts.dart';
+import 'package:style/core/Widgets/Confirm_Dialog.dart';
 
 class CartViewItem extends StatelessWidget {
   const CartViewItem({super.key});
@@ -90,7 +91,18 @@ class CartViewItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Spacer(),
-                    Icon(Icons.delete_sweep, color: Color(0xFFE74C3C)),
+                    InkWell(
+                      onTap: () {
+                        showConfirmDialog(
+                          context: context,
+                          title: "Remove from cart",
+                          message:
+                              "Are You Shure You Want to Remove this Item from your cart?",
+                          onConfirm: () {},
+                        );
+                      },
+                      child: Icon(Icons.delete_sweep, color: Color(0xFFE74C3C)),
+                    ),
                   ],
                 ),
               ),

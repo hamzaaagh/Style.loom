@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:style/core/Consts/color_consts.dart';
+import 'package:style/core/Widgets/Confirm_Dialog.dart';
 
 class FavoraiteListViewItem extends StatelessWidget {
   const FavoraiteListViewItem({super.key});
@@ -89,11 +90,38 @@ class FavoraiteListViewItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.shopping_cart_checkout, color: Consts.brown60),
+                    InkWell(
+                      onTap: () {
+                        showConfirmDialog(
+                          context: context,
+                          title: "Add to cart",
+                          message:
+                              "Are you sure you want to add this item to your cart?",
+                          onConfirm: () {},
+                        );
+                      },
+                      child: Icon(
+                        Icons.shopping_cart_checkout,
+                        color: Consts.brown60,
+                      ),
+                    ),
                     Spacer(),
-                    Icon(
-                      Icons.do_disturb_on_outlined,
-                      color: Color(0xFFE74C3C),
+                    InkWell(
+                      onTap: () {
+                        showConfirmDialog(
+                          context: context,
+                          title: 'Remove from Favorites',
+                          message:
+                              'Are you sure you want to remove this item from your favorites?',
+                          onConfirm: () {
+                            // تنفيذ القرار
+                          },
+                        );
+                      },
+                      child: Icon(
+                        Icons.do_disturb_on_outlined,
+                        color: Color(0xFFE74C3C),
+                      ),
                     ),
                   ],
                 ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:style/core/Widgets/Confirm_Dialog.dart';
 
 import 'package:style/core/Widgets/Custom_Bottom.dart';
 import 'package:style/features/Cart/presentation/View/Widgets/Cart_Summary.dart';
@@ -28,7 +29,14 @@ class CartViewBody extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: CustomBottom(
               text: "Checkout",
-              onPressed: () {},
+              onPressed: () {
+                showConfirmDialog(
+                  context: context,
+                  title: "Checkout",
+                  message: "Are You Shur You Want to checkout?",
+                  onConfirm: () {},
+                );
+              },
               icon: Icons.payment_outlined,
             ),
           ),
