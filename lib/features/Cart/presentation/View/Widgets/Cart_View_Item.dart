@@ -71,6 +71,15 @@ class CartViewItem extends StatelessWidget {
                     //   "Color : White",
                     //   style: TextStyle(color: Colors.white, fontSize: 15),
                     // ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: Text(
+                        "This is descreption of the product This is descreption of the product",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
+                    ),
                   ],
                 ),
               ),

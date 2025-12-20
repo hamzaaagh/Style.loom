@@ -13,11 +13,9 @@ import 'package:style/core/Widgets/Main_Layout.dart';
 import 'package:style/features/Favoraite/data/Favoraite_repo_Imp.dart';
 import 'package:style/features/Favoraite/presentation/manager/Add_To_Favoraite_Cubit/add_to_favoraite_cubit.dart';
 
-
 import 'package:style/features/Home/data/Repo/Home_Repo_Imp.dart';
 import 'package:style/features/Home/presentation/manager/fetch_Sub_Category_cubit/fetch_subcategory_cubit.dart';
 import 'package:style/features/Home/presentation/manager/fetch_product_cubit/fetch_product_model_cubit.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,7 +56,10 @@ class StyleLoom extends StatelessWidget {
                     ..fetchproductmodel(mainId: 0),
             ),
             //  BlocProvider(create: (context) => FetchFavoraiteItemsCubit(FavoraiteRepoImp())),
-            BlocProvider(create: (context) => AddToFavoraiteCubit(FavoraiteRepoImp(api: Api(dio: Dio()))))
+            BlocProvider(
+              create: (context) =>
+                  AddToFavoraiteCubit(FavoraiteRepoImp(api: Api(dio: Dio()))),
+            ),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
