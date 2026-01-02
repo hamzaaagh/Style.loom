@@ -40,7 +40,12 @@ class _SimiliarProductsListViewState extends State<SimiliarProductsListView> {
           if (items.isEmpty) {
             return SizedBox(
               height: 150,
-              child: const Center(child: Text("No Similiar Products !!",style: TextStyle(color: Colors.white,fontSize: 25),)),
+              child: const Center(
+                child: Text(
+                  "No Similiar Products !!",
+                  style: TextStyle(color: Colors.white, fontSize: 25),
+                ),
+              ),
             );
           } else {
             return SizedBox(

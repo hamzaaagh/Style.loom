@@ -45,33 +45,18 @@ class _CustomTextFieldState extends State<CustomTextField> {
       onChanged: widget.onChanged,
       controller: widget.controller,
       obscureText: widget.isPassword ? _obscure : false,
-      style: TextStyle(
-        color: widget.textColor,
-        fontSize: 16.sp,
-      ),
+      style: TextStyle(color: widget.textColor, fontSize: 16.sp),
       cursorColor: widget.cursorColor,
       validator: widget.validator,
       decoration: InputDecoration(
         filled: true,
         fillColor: Consts.black12,
-        contentPadding: EdgeInsets.symmetric(
-          horizontal: 16.w,
-          vertical: 16.h,
-        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         labelText: widget.labelText,
-        labelStyle: TextStyle(
-          color: widget.labelColor,
-          fontSize: 14.sp,
-        ),
+        labelStyle: TextStyle(color: widget.labelColor, fontSize: 14.sp),
         hintText: widget.hintText,
-        hintStyle: TextStyle(
-          color: widget.hintColor,
-          fontSize: 14.sp,
-        ),
-        errorStyle: TextStyle(
-          color: Colors.red,
-          fontSize: 11.sp,
-        ),
+        hintStyle: TextStyle(color: widget.hintColor, fontSize: 14.sp),
+        errorStyle: TextStyle(color: Colors.red, fontSize: 11.sp),
         errorMaxLines: 2,
         suffixIcon: widget.isPassword
             ? IconButton(
@@ -91,31 +76,19 @@ class _CustomTextFieldState extends State<CustomTextField> {
             : null,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(
-            color: widget.borderColor,
-            width: 1.2.w,
-          ),
+          borderSide: BorderSide(color: widget.borderColor, width: 1.2.w),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(
-            color: widget.focusBorderColor,
-            width: 1.5.w,
-          ),
+          borderSide: BorderSide(color: widget.focusBorderColor, width: 1.5.w),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(
-            color: Colors.red,
-            width: 1.2.w,
-          ),
+          borderSide: BorderSide(color: Colors.red, width: 1.2.w),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.r),
-          borderSide: BorderSide(
-            color: Colors.red,
-            width: 1.5.w,
-          ),
+          borderSide: BorderSide(color: Colors.red, width: 1.5.w),
         ),
       ),
     );

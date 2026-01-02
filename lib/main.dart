@@ -10,6 +10,9 @@ import 'package:style/features/Auth/data/Repo/Auth_Repo_Imp.dart';
 import 'package:style/features/Auth/presentation/manager/Login_Cubit/login_cubit.dart';
 import 'package:style/features/Auth/presentation/manager/Register_Cubit/register_cubit.dart';
 import 'package:style/core/Widgets/Main_Layout.dart';
+import 'package:style/features/Cart/Data/Cart_Repo_Imp.dart';
+import 'package:style/features/Cart/presentation/manager/Add_to_cart_cubit/add_to_cart_cubit.dart';
+import 'package:style/features/Cart/presentation/manager/Fetch_cart_items.dart/fetch_cart_items_cubit.dart';
 import 'package:style/features/Favoraite/data/Favoraite_repo_Imp.dart';
 import 'package:style/features/Favoraite/presentation/manager/Add_To_Favoraite_Cubit/add_to_favoraite_cubit.dart';
 

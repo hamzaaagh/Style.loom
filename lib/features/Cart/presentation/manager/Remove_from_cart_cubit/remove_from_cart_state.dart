@@ -8,9 +8,11 @@ sealed class RemoveFromCartState extends Equatable {
 }
 
 final class RemoveFromCartInitial extends RemoveFromCartState {}
+
 final class RemoveFromCartLoading extends RemoveFromCartState {}
 
 final class RemoveFromCartSuccess extends RemoveFromCartState {}
+
 final class RemoveFromCartFailure extends RemoveFromCartState {
   final String errorMessage;
 

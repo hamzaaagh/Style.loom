@@ -7,7 +7,8 @@ part 'remove_from_cart_state.dart';
 
 class RemoveFromCartCubit extends Cubit<RemoveFromCartState> {
   final CartRepoImp cartRepoImp;
-  RemoveFromCartCubit({required this.cartRepoImp}) : super(RemoveFromCartInitial());
+  RemoveFromCartCubit({required this.cartRepoImp})
+    : super(RemoveFromCartInitial());
   Future<void> removeFromCart({
     required ProductModel product,
     required int userId,

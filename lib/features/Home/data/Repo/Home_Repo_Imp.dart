@@ -50,7 +50,6 @@ class HomeRepoImp extends HomeRepo {
     var response = await api.get(endpoint: "categories/main/");
     try {
       if (response.statusCode == 200) {
-        
         List<MainCategory> subcategories = [];
         for (var item in response.data) {
           if (mainId == 0) {

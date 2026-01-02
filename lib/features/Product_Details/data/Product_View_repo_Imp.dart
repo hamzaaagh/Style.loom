@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
 
@@ -47,7 +46,7 @@ class ProductViewRepoImp implements ProductViewRepo {
 
       return Right(similar);
     } catch (e) {
-      return Left(Serverfailur( errormessage: e.toString()));
+      return Left(Serverfailur(errormessage: e.toString()));
     }
   }
 

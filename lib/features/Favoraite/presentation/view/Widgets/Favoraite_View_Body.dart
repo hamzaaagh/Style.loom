@@ -66,7 +66,6 @@ class _FavoraiteViewBodyState extends State<FavoraiteViewBody> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: CustomBottom(
-             
               text: "Add All To Cart",
               onPressed: () {},
               icon: Icons.shopping_cart,

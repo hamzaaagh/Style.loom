@@ -9,10 +9,12 @@ part 'fetch_similiar_item_state.dart';
 
 class FetchSimiliarItemCubit extends Cubit<FetchSimiliarItemState> {
   final ProductViewRepoImp productimp;
- 
-  FetchSimiliarItemCubit({ required this.productimp, })
+
+  FetchSimiliarItemCubit({required this.productimp})
     : super(FetchSimiliarItemInitial());
-  Future<void> fetchSimiliarproductsitem({required ProductModel product,}) async {
+  Future<void> fetchSimiliarproductsitem({
+    required ProductModel product,
+  }) async {
     var result = await productimp.fetchsimiliarproducts(product: product);
     result.fold(
       (failure) {

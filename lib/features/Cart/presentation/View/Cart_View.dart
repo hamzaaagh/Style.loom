@@ -1,8 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:style/core/Consts/color_consts.dart';
+import 'package:style/core/utils/Api/api.dart';
+import 'package:style/features/Cart/Data/Cart_Repo_Imp.dart';
 
 import 'package:style/features/Cart/presentation/View/Widgets/Cart_View_Body.dart';
+import 'package:style/features/Cart/presentation/manager/Fetch_cart_items.dart/fetch_cart_items_cubit.dart';
 
 class CartView extends StatefulWidget {
   const CartView({super.key});
@@ -12,7 +17,7 @@ class CartView extends StatefulWidget {
 }
 
 class _CartViewState extends State<CartView> {
-//  int _currentIndex = 1;
+  //  int _currentIndex = 1;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -30,8 +35,12 @@ class _CartViewState extends State<CartView> {
             ),
           ),
         ),
-        body: const CartViewBody(),
-       
+        body: BlocProvider(
+          create: (context) => FetchCartItemsCubit(
+            cartRepoImp: CartRepoImp(api: Api(dio: Dio())),
+          )..fetchCartItems(userId: 1),
+          child: const CartViewBody(),
+        ),
       ),
     );
   }

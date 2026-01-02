@@ -1,13 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:style/core/Consts/color_consts.dart';
+import 'package:style/core/Consts/const_Ip_Adress.dart';
+import 'package:style/core/Models/cart/item.model.dart';
+import 'package:style/core/Widgets/Circular_Indector.dart';
+
 import 'package:style/core/Widgets/Confirm_Dialog.dart';
 
 class CartViewItem extends StatelessWidget {
-  const CartViewItem({super.key});
+  const CartViewItem({super.key, required this.item});
+  final Item item;
 
   @override
   Widget build(BuildContext context) {
+    final imageurl =
+        "http://${IPconsts.ipadress}:3000${item.product!.imageUrl}";
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
@@ -28,17 +36,17 @@ class CartViewItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               //هون الصورة
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: Container(
-                    height: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
-                    ),
-                    child: Text("Image"),
+              AspectRatio(
+                aspectRatio: 1,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: CachedNetworkImage(
+                    imageUrl: imageurl,
+                    placeholder: (context, url) =>
+                        const Center(child: CircularIndector()),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -51,7 +59,7 @@ class CartViewItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Shirt",
+                      item.product!.name!,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -59,7 +67,7 @@ class CartViewItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "22 \$",
+                      "${item.product!.price} \$",
                       style: TextStyle(color: Consts.brown60, fontSize: 14),
                     ),
                     const SizedBox(height: 8),
@@ -75,7 +83,7 @@ class CartViewItem extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.4,
                       child: Text(
-                        "This is descreption of the product This is descreption of the product",
+                        item.product!.description!,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(color: Colors.white, fontSize: 15),

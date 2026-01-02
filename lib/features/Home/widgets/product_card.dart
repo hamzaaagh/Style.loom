@@ -89,8 +89,7 @@ class _ProductCardState extends State<ProductCard> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(3),
-                      child: FavoriteIcon(product: widget.product,),
-                       
+                      child: FavoriteIcon(product: widget.product),
                     ),
                   ),
                 ),

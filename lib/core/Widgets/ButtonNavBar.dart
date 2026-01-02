@@ -1,16 +1,13 @@
 // ignore_for_file: must_be_immutable
 
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import 'package:style/core/Consts/color_consts.dart';
 
-
 class Buttonnavbar extends StatelessWidget {
-  Buttonnavbar({super.key, this.currentIndex = 0,required this.onTap});
+  Buttonnavbar({super.key, this.currentIndex = 0, required this.onTap});
   int currentIndex;
   final ValueChanged<int> onTap;
   @override
@@ -50,5 +47,5 @@ class Buttonnavbar extends StatelessWidget {
     HugeIcons.strokeRoundedFavourite,
     HugeIcons.strokeRoundedUserStory,
   ];
- // final labels = [HomeView(), CartView(), FavoraiteView(), HomeView()];
+  // final labels = [HomeView(), CartView(), FavoraiteView(), HomeView()];
 }

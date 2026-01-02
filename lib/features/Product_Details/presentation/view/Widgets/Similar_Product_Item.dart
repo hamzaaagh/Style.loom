@@ -18,7 +18,7 @@ class SimilarProductItem extends StatelessWidget {
 
     return Ink(
       width: 120,
-          height: 150,
+      height: 150,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),

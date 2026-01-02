@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ProductRatingStars extends StatelessWidget {
-  final double rating;     // التقييم الحالي
-  final double size;       // حجم النجوم
-  final int starCount;     // عدد النجوم (عادة 5)
+  final double rating; // التقييم الحالي
+  final double size; // حجم النجوم
+  final int starCount; // عدد النجوم (عادة 5)
   final bool isInteractive; // هل المستخدم يستطيع التقييم؟
 
   const ProductRatingStars({
@@ -26,10 +26,8 @@ class ProductRatingStars extends StatelessWidget {
             itemCount: starCount,
             itemSize: size,
             itemPadding: const EdgeInsets.symmetric(horizontal: 2.0),
-            itemBuilder: (context, _) => const Icon(
-              Icons.star,
-              color: Colors.amber,
-            ),
+            itemBuilder: (context, _) =>
+                const Icon(Icons.star, color: Colors.amber),
             onRatingUpdate: (newRating) {
               // يمكنك هنا حفظ التقييم مثلاً في Firebase أو في state
               print("New Rating: $newRating");
@@ -37,10 +35,8 @@ class ProductRatingStars extends StatelessWidget {
           )
         : RatingBarIndicator(
             rating: rating,
-            itemBuilder: (context, _) => const Icon(
-              Icons.star,
-              color: Colors.amber,
-            ),
+            itemBuilder: (context, _) =>
+                const Icon(Icons.star, color: Colors.amber),
             itemCount: starCount,
             itemSize: size,
             direction: Axis.horizontal,

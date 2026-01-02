@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:style/core/Consts/color_consts.dart';
 
-
 import 'package:style/features/Home/widgets/Home_View_Body.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
-  
 
   @override
   State<HomeView> createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> {
-  
-
- 
-  
   @override
   Widget build(BuildContext context) {
     // no fixed height calculation needed when the whole Home is one scrollable
@@ -53,7 +47,6 @@ class _HomeViewState extends State<HomeView> {
       ),
 
       body: HomeViewBody(),
-    
     );
   }
 }

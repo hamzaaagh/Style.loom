@@ -10,6 +10,4 @@ class FetchFavoraiteItemsCubit extends Cubit<FetchFavoraiteItemsState> {
   FetchFavoraiteItemsCubit(this.favoraiteRepoImp)
     : super(FetchFavoraiteItemsInitial());
   List<ProductModel> favoraiteProducts = [];
- 
-  }
-
+}

@@ -19,10 +19,7 @@ class CustomElevatedButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(
-            vertical: 14.h,
-            horizontal: 16.w,
-          ),
+          padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 16.w),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.r),
           ),
@@ -47,9 +44,7 @@ class CustomElevatedButton extends StatelessWidget {
           ),
           child: Container(
             alignment: Alignment.center,
-            constraints: BoxConstraints(
-              minHeight: 48.h,
-            ),
+            constraints: BoxConstraints(minHeight: 48.h),
             padding: EdgeInsets.symmetric(vertical: 4.h),
             child: Text(
               text,

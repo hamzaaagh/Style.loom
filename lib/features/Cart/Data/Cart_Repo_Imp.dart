@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:style/core/Models/cart/item.model.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
 import 'package:style/core/utils/Api/api.dart';
 import 'package:style/core/utils/errors/failurs.dart';
@@ -39,17 +40,17 @@ class CartRepoImp implements CartRepo {
   }
 
   @override
-  Future<Either<Failurs, List<ProductModel>>> getCartItems({
+  Future<Either<Failurs, List<Item>>> fetchCartItems({
     required int id,
   }) async {
     try {
       var response = await api.get(endpoint: "cart/$id");
       if (response.statusCode == 200 || response.statusCode == 201) {
-        List<ProductModel> products = [];
-        for (var item in response.data) {
-          products.add(ProductModel.fromJson(item));
+        List<Item> items = [];
+        for (var item in response.data['items']) {
+          items.add(Item.fromJson(item));
         }
-        return right(products);
+        return right(items);
       } else {
         return left(
           Serverfailur(

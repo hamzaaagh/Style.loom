@@ -4,7 +4,7 @@ import 'package:style/core/Consts/color_consts.dart';
 
 class CartSummary extends StatelessWidget {
   const CartSummary({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:style/core/Consts/color_consts.dart';
 
-
 import 'package:style/features/Favoraite/presentation/view/Widgets/Favoraite_View_Body.dart';
 
 class FavoraiteView extends StatefulWidget {
@@ -12,7 +11,6 @@ class FavoraiteView extends StatefulWidget {
 }
 
 class _FavoraiteViewState extends State<FavoraiteView> {
-  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -30,7 +28,6 @@ class _FavoraiteViewState extends State<FavoraiteView> {
           centerTitle: true,
         ),
         body: FavoraiteViewBody(),
-       
       ),
     );
   }

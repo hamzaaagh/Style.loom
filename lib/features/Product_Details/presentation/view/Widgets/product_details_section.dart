@@ -151,7 +151,7 @@ class ProductDetailsSection extends StatelessWidget {
           const SizedBox(height: 25),
           const Text(
             "Similiar Products",
-            style:TextStyle(
+            style: TextStyle(
               color: Consts.brown70,
               fontSize: 25,
               fontWeight: FontWeight.bold,

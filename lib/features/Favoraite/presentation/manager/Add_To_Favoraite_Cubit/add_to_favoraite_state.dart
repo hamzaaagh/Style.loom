@@ -15,8 +15,6 @@ final class AddToFavoraiteFailure extends AddToFavoraiteState {
   final String errmessage;
 
   const AddToFavoraiteFailure(this.errmessage);
-
-  
 }
 
 final class AddToFavoraiteSuccess extends AddToFavoraiteState {}

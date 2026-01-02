@@ -8,12 +8,15 @@ sealed class FetchCartItemsState extends Equatable {
 }
 
 final class FetchCartItemsInitial extends FetchCartItemsState {}
-final class FetchCartItemsLoading extends FetchCartItemsState {}
-final class FetchCartItemsSuccess extends FetchCartItemsState {
-  final List<ProductModel> products;
 
-  const FetchCartItemsSuccess({required this.products});
+final class FetchCartItemsLoading extends FetchCartItemsState {}
+
+final class FetchCartItemsSuccess extends FetchCartItemsState {
+  final List<Item> items;
+
+  const FetchCartItemsSuccess({required this.items});
 }
+
 final class FetchCartItemsFailure extends FetchCartItemsState {
   final String errorMessage;
 

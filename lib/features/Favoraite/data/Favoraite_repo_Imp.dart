@@ -23,7 +23,7 @@ class FavoraiteRepoImp implements FavoraiteRepo {
       );
       if (response.statusCode == 200) {
         favoraiteItems.add(product);
-         return right(null);
+        return right(null);
       } else {
         return left(
           Serverfailur(
@@ -42,27 +42,27 @@ class FavoraiteRepoImp implements FavoraiteRepo {
   @override
   Future<Either<Failurs, List<ProductModel>>> getFavoraiteItems(int id) async {
     try {
-  var response = await api.get(endpoint: "getFavoritesById?userId=$id");
-  if (response.statusCode == 200) {
-    favoraiteItems.clear();
-    for (var item in response.data) {
-      favoraiteItems.add(ProductModel.fromJson(item));
-      
+      var response = await api.get(endpoint: "getFavoritesById?userId=$id");
+      if (response.statusCode == 200) {
+        favoraiteItems.clear();
+        for (var item in response.data) {
+          favoraiteItems.add(ProductModel.fromJson(item));
+        }
+        return right(favoraiteItems);
+      } else {
+        return left(
+          Serverfailur(
+            errormessage:
+                "Failed to fetch favoriate list ${response.statusCode}",
+          ),
+        );
+      }
+    } catch (e) {
+      if (e is DioException) {
+        return left(Serverfailur.fromDioexaption(e));
+      }
     }
-    return right(favoraiteItems);
-  } else {
-    return left(
-      Serverfailur(
-        errormessage: "Failed to fetch favoriate list ${response.statusCode}",
-      ),
-    );
-  }
-}  catch (e) {
-    if (e is DioException) {
-      return left(Serverfailur.fromDioexaption(e));
-    }
-  }
-  return left(Serverfailur(errormessage: "Something went wrong"));
+    return left(Serverfailur(errormessage: "Something went wrong"));
   }
 
   @override
@@ -78,7 +78,7 @@ class FavoraiteRepoImp implements FavoraiteRepo {
       );
       if (response.statusCode == 200) {
         favoraiteItems.removeWhere((item) => item.id == product.id);
-         return right(null);
+        return right(null);
       } else {
         return left(
           Serverfailur(

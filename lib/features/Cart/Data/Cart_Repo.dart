@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:style/core/Models/cart/item.model.dart';
+
 import 'package:style/core/Models/product_model/product_model.dart';
 import 'package:style/core/utils/errors/failurs.dart';
 
@@ -8,10 +10,9 @@ abstract class CartRepo {
     required int userId,
     required int quantity,
   });
-  Future<Either<Failurs, List<ProductModel>>> getCartItems({required int id});
+  Future<Either<Failurs, List<Item>>> fetchCartItems({required int id});
   Future<Either<Failurs, void>> removeFromCart({
     required ProductModel product,
     required int userId,
   });
-
 }

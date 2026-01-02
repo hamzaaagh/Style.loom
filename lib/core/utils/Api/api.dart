@@ -24,10 +24,12 @@ class Api {
     return response;
   }
 
-  Future<Response> delete({required Map<String, dynamic> data,
+  Future<Response> delete({
+    required Map<String, dynamic> data,
     required String baseUrl,
-    required String type,}) async  {
+    required String type,
+  }) async {
     Response response = await _dio.delete("$baseUrl$type", data: data);
     return response;
-    }
+  }
 }

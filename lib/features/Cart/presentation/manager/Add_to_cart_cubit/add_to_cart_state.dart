@@ -8,12 +8,13 @@ sealed class AddToCartState extends Equatable {
 }
 
 final class AddToCartInitial extends AddToCartState {}
+
 final class AddToCartLoading extends AddToCartState {}
+
 final class AddToCartSuccess extends AddToCartState {}
+
 final class AddToCartFailure extends AddToCartState {
   final String errorMessage;
 
   const AddToCartFailure({required this.errorMessage});
-
-  
 }

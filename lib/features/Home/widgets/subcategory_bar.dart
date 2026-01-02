@@ -23,7 +23,7 @@ class SubCategoryBar extends StatelessWidget {
               .toList();
 
           return Container(
-            height:MediaQuery.of(context).size.height * 0.16,
+            height: MediaQuery.of(context).size.height * 0.16,
             margin: const EdgeInsets.only(
               right: 16,
               left: 16,
@@ -73,7 +73,7 @@ class SubCategoryItem extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 8,bottom: 4,right: 8,left: 8),
+            margin: EdgeInsets.only(top: 8, bottom: 4, right: 8, left: 8),
             width: MediaQuery.of(context).size.height * 0.1,
             height: MediaQuery.of(context).size.height * 0.1,
             decoration: const BoxDecoration(
@@ -97,4 +97,5 @@ class SubCategoryItem extends StatelessWidget {
     );
   }
 }
- //onTap: () => onSubCategorySelected?.call(name),
+
+//onTap: () => onSubCategorySelected?.call(name),
