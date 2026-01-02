@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 
 import 'package:equatable/equatable.dart';
 import 'package:style/core/Models/cart/item.model.dart';
-import 'package:style/core/Models/product_model/product_model.dart';
+
 
 import 'package:style/features/Cart/Data/Cart_Repo_Imp.dart';
 
