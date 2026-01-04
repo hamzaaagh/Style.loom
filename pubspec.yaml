@@ -40,6 +40,7 @@ dependencies:
   flutter_bloc: ^9.1.1
   flutter_rating_bar: ^4.0.1
   flutter_screenutil: ^5.9.3
+  flutter_secure_storage: ^10.0.0
   get_it: ^8.2.0
   hugeicons: ^1.1.1
   ionicons: ^0.2.1
