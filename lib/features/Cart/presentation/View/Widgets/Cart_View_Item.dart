@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:style/core/Consts/color_consts.dart';
 import 'package:style/core/Consts/const_Ip_Adress.dart';
@@ -8,6 +8,8 @@ import 'package:style/core/Models/cart/item.model.dart';
 import 'package:style/core/Widgets/Circular_Indector.dart';
 
 import 'package:style/core/Widgets/Confirm_Dialog.dart';
+
+import 'package:style/core/functions/show_snack_bar.dart';
 import 'package:style/features/Cart/presentation/manager/Fetch_cart_items.dart/fetch_cart_items_cubit.dart';
 
 import 'package:style/features/Cart/presentation/manager/Remove_from_cart_cubit/remove_from_cart_cubit.dart';
@@ -112,15 +114,16 @@ class CartViewItem extends StatelessWidget {
                       BlocListener<RemoveFromCartCubit, RemoveFromCartState>(
                         listener: (context, state) {
                           if (state is RemoveFromCartSuccess) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Item deleted successfully'),
-                              ),
+                           showSnackBar(
+                              context: context,
+                              message: "Item removed from cart",
+                              state: true,
                             );
                           } else if (state is RemoveFromCartFailure) {
-                            print(state.errorMessage);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Failed to delete item')),
+                            showSnackBar(
+                              context: context,
+                              message: "failed to remove item from cart",
+                              state: false,
                             );
                           }
                         },

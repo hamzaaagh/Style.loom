@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:style/core/Consts/color_consts.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
 import 'package:style/core/Widgets/Custom_Bottom.dart';
+import 'package:style/core/functions/show_snack_bar.dart';
 import 'package:style/features/Cart/presentation/manager/Add_to_cart_cubit/add_to_cart_cubit.dart';
 import 'package:style/features/Cart/presentation/manager/Fetch_cart_items.dart/fetch_cart_items_cubit.dart';
 import 'package:style/features/Product_Details/presentation/view/Widgets/Custom_Expansion_Tile.dart';
@@ -135,13 +136,15 @@ class ProductDetailsSection extends StatelessWidget {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text(state.errorMessage)),
                           );
-                        }
-                        else if (state is AddToCartSuccess) {
+                        } else if (state is AddToCartSuccess) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                                content: Text('Product added to cart')),
+                              content: Text('Product added to cart'),
+                            ),
                           );
-                          context.read<FetchCartItemsCubit>().fetchCartItems(userId: 1);
+                          context.read<FetchCartItemsCubit>().fetchCartItems(
+                            userId: 1,
+                          );
                         }
                       },
                     ),
@@ -188,18 +191,18 @@ class ProductDetailsSection extends StatelessWidget {
                           icon: Icons.card_giftcard,
                         );
                       },
-                       listener: (context, state) {
+                      listener: (context, state) {
                         if (state is AddToCartFailure) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(state.errorMessage)),
+                          showSnackBar(
+                            message: "failed add to cart",
+                            state: false,
+                            context: context,
                           );
-                        }
-                        else if (state is AddToCartSuccess) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('Product added to cart')),
+                        } else if (state is AddToCartSuccess) {
+                          showSnackBar(message: "Added to cart succesfully", state: true, context: context);
+                          context.read<FetchCartItemsCubit>().fetchCartItems(
+                            userId: 1,
                           );
-                          context.read<FetchCartItemsCubit>().fetchCartItems(userId: 1);
                         }
                       },
                     ),
