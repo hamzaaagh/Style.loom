@@ -4,7 +4,7 @@ import 'package:style/core/Consts/color_consts.dart';
 class CustomBottom extends StatelessWidget {
   final String text;
   final IconData icon;
-  final VoidCallback onPressed;
+  final void Function() onPressed;
   final Color? color;
 
   const CustomBottom({

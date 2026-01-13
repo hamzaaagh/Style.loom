@@ -1,13 +1,14 @@
-import 'package:dio/dio.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:style/core/Consts/color_consts.dart';
-import 'package:style/core/utils/Api/api.dart';
+import 'package:style/core/utils/Api/api_service.dart';
 import 'package:style/features/Cart/Data/Cart_Repo_Imp.dart';
 
 import 'package:style/features/Cart/presentation/View/Widgets/Cart_View_Body.dart';
 import 'package:style/features/Cart/presentation/manager/Fetch_cart_items.dart/fetch_cart_items_cubit.dart';
+import 'package:style/features/Cart/presentation/manager/Remove_from_cart_cubit/remove_from_cart_cubit.dart';
 
 class CartView extends StatefulWidget {
   const CartView({super.key});
@@ -17,9 +18,14 @@ class CartView extends StatefulWidget {
 }
 
 class _CartViewState extends State<CartView> {
-  //  int _currentIndex = 1;
+   @override
+    void initState() {
+      super.initState();
+      context.read<FetchCartItemsCubit>().fetchCartItems(userId: 1);
+    }
   @override
   Widget build(BuildContext context) {
+   
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -36,11 +42,8 @@ class _CartViewState extends State<CartView> {
           ),
         ),
         body: BlocProvider(
-          create: (context) => FetchCartItemsCubit(
-            cartRepoImp: CartRepoImp(api: Api(dio: Dio())),
-          )..fetchCartItems(userId: 1),
-          child: const CartViewBody(),
-        ),
+          create: (context) => RemoveFromCartCubit(cartRepoImp: CartRepoImp(api: Api())),
+          child: const CartViewBody()),
       ),
     );
   }

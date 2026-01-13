@@ -15,23 +15,20 @@ class _FavoriteIconState extends State<FavoriteIcon> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AddToFavoraiteCubit, AddToFavoraiteState>(
-      listener: (context, state) {},
-      child: InkWell(
-        child: Icon(
-          isFavorite ? Icons.favorite : Icons.favorite_border,
+    return InkWell(
+      child: Icon(
+        isFavorite ? Icons.favorite : Icons.favorite_border,
 
-          color: isFavorite ? Colors.red : Colors.black,
-          size: 20,
-          fontWeight: FontWeight.normal,
-        ),
-        onTap: () {
-          setState(() {
-            isFavorite = !isFavorite;
-          });
-          BlocProvider.of<AddToFavoraiteCubit>(context).add(widget.product, 1);
-        },
+        color: isFavorite ? Colors.red : Colors.black,
+        size: 20,
+        fontWeight: FontWeight.normal,
       ),
+      onTap: () {
+        setState(() {
+          isFavorite = !isFavorite;
+        });
+        BlocProvider.of<AddToFavoraiteCubit>(context).add(widget.product, 1);
+      },
     );
   }
 }

@@ -12,7 +12,7 @@ abstract class CartRepo {
   });
   Future<Either<Failurs, List<Item>>> fetchCartItems({required int id});
   Future<Either<Failurs, void>> removeFromCart({
-    required ProductModel product,
+    required Item product,
     required int userId,
   });
 }

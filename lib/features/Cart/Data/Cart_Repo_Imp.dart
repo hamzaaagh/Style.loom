@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:style/core/Models/cart/item.model.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
-import 'package:style/core/utils/Api/api.dart';
+import 'package:style/core/utils/Api/api_service.dart';
 import 'package:style/core/utils/errors/failurs.dart';
 import 'package:style/features/Cart/Data/Cart_Repo.dart';
 
@@ -18,13 +18,13 @@ class CartRepoImp implements CartRepo {
   }) async {
     try {
       var response = await api.post(
-        data: {"userId": userId, "productId": product.id, "quantity": quantity},
-        baseUrl: "http://localhost:3000/api/",
-        type: "cart",
+        data: {"userId": userId, "productId": product.id, "quantity": quantity},    
+        endpoint: "cart",
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         return right(null);
-      } else {
+      } 
+        else {
         return left(
           Serverfailur(
             errormessage: "Failed to add to cart ${response.statusCode}",
@@ -68,14 +68,13 @@ class CartRepoImp implements CartRepo {
 
   @override
   Future<Either<Failurs, void>> removeFromCart({
-    required ProductModel product,
+    required Item product,
     required int userId,
   }) async {
     try {
       var response = await api.delete(
-        data: {"userId": userId, "productId": product.id},
-        baseUrl: "http://localhost:3000/api/",
-        type: "cart/removeFromCart",
+        data: {"userId": userId, "productId": product.productId},
+        endpoint: "cart/removeFromCart",
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         return right(null);

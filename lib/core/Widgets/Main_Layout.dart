@@ -21,6 +21,7 @@ class _MainLayoutState extends State<MainLayout> {
     FavoraiteView(),
     HomeView(),
   ];
+ 
 
   @override
   Widget build(BuildContext context) {

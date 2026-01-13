@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:style/core/Widgets/Circular_Indector.dart';
 import 'package:style/core/Widgets/Confirm_Dialog.dart';
@@ -21,23 +21,36 @@ class CartViewBody extends StatelessWidget {
         children: [
           BlocBuilder<FetchCartItemsCubit, FetchCartItemsState>(
             builder: (context, state) {
-              print(state);
+              
               if (state is FetchCartItemsSuccess) {
                 return ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: state.items.length,
                   itemBuilder: (context, index) {
+                    if (state.items.isEmpty) {
+                      return Center(
+                        child: Text(
+                          "No Items in Cart",
+                          style: TextStyle(color: Colors.white, fontSize: 40),
+                        ),
+                      );
+                    }
                     return CartViewItem(item: state.items[index]);
                   },
                 );
               } else if (state is FetchCartItemsLoading) {
                 return Center(child: CircularIndector());
               } else if (state is FetchCartItemsFailure) {
-                print(state.errorMessage);
+                
                 return Center(child: Text(state.errorMessage));
               } else {
-                return Center(child: Text("No Items in Cart"));
+                return Center(
+                  child: Text(
+                    "Something went wrong!",
+                   
+                  ),
+                );
               }
             },
           ),

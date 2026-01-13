@@ -1,20 +1,21 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:style/core/Consts/color_consts.dart';
-import 'package:style/core/utils/Api/api.dart';
+import 'package:style/core/Widgets/Main_Layout.dart';
+
+import 'package:style/core/utils/Api/api_service.dart';
+import 'package:style/core/utils/Api/dio_client.dart';
 
 import 'package:style/features/Auth/data/Repo/Auth_Repo_Imp.dart';
 import 'package:style/features/Auth/presentation/manager/Login_Cubit/login_cubit.dart';
 import 'package:style/features/Auth/presentation/manager/Register_Cubit/register_cubit.dart';
-import 'package:style/core/Widgets/Main_Layout.dart';
+
+
 import 'package:style/features/Cart/Data/Cart_Repo_Imp.dart';
 import 'package:style/features/Cart/presentation/manager/Add_to_cart_cubit/add_to_cart_cubit.dart';
 import 'package:style/features/Cart/presentation/manager/Fetch_cart_items.dart/fetch_cart_items_cubit.dart';
-import 'package:style/features/Favoraite/data/Favoraite_repo_Imp.dart';
-import 'package:style/features/Favoraite/presentation/manager/Add_To_Favoraite_Cubit/add_to_favoraite_cubit.dart';
 
 import 'package:style/features/Home/data/Repo/Home_Repo_Imp.dart';
 import 'package:style/features/Home/presentation/manager/fetch_Sub_Category_cubit/fetch_subcategory_cubit.dart';
@@ -22,15 +23,15 @@ import 'package:style/features/Home/presentation/manager/fetch_product_cubit/fet
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Lock orientation to portrait up only for the whole app
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  DioClient.setupInterceptors();
 
-  runApp(const StyleLoom());
+  runApp(StyleLoom());
 }
 
 class StyleLoom extends StatelessWidget {
-  const StyleLoom({super.key});
-
+  StyleLoom({super.key});
+  final api = Api();
+  late final authRepo = AuthRepoImp(api: api);
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -41,28 +42,30 @@ class StyleLoom extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (context) =>
-                  RegisterCubit(AuthRepoImp(api: Api(dio: Dio()))),
+              create: (context) => RegisterCubit(AuthRepoImp(api: Api())),
             ),
+            BlocProvider(create: (context) => LoginCubit(authRepo)),
             BlocProvider(
               create: (context) =>
-                  LoginCubit(AuthRepoImp(api: Api(dio: Dio()))),
-            ),
-            BlocProvider(
-              create: (context) =>
-                  FetchSubcategoryCubit(HomeRepoImp(api: Api(dio: Dio())))
+                  FetchSubcategoryCubit(HomeRepoImp(api: Api()))
                     ..fetchSubCategory(mainId: 0),
             ),
             BlocProvider(
               create: (context) =>
-                  FetchProductModelCubit(HomeRepoImp(api: Api(dio: Dio())))
+                  FetchProductModelCubit(HomeRepoImp(api: Api()))
                     ..fetchproductmodel(mainId: 0),
             ),
-            //  BlocProvider(create: (context) => FetchFavoraiteItemsCubit(FavoraiteRepoImp())),
+            // BlocProvider(
+            //   create: (context) =>
+            //       FetchFavoraiteItemsCubit(FavoraiteRepoImp(api: Api())),
+            // ),
+
             BlocProvider(
               create: (context) =>
-                  AddToFavoraiteCubit(FavoraiteRepoImp(api: Api(dio: Dio()))),
+                  AddToCartCubit(cartRepoImp: CartRepoImp(api: Api())),
             ),
+            BlocProvider(create: (context) =>
+                FetchCartItemsCubit(cartRepoImp: CartRepoImp(api: Api()))),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

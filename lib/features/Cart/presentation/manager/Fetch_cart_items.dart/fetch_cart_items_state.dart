@@ -11,6 +11,8 @@ final class FetchCartItemsInitial extends FetchCartItemsState {}
 
 final class FetchCartItemsLoading extends FetchCartItemsState {}
 
+
+
 final class FetchCartItemsSuccess extends FetchCartItemsState {
   final List<Item> items;
 

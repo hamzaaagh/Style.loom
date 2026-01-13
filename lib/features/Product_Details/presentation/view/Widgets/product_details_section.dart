@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:style/core/Consts/color_consts.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
 import 'package:style/core/Widgets/Custom_Bottom.dart';
+import 'package:style/features/Cart/presentation/manager/Add_to_cart_cubit/add_to_cart_cubit.dart';
+import 'package:style/features/Cart/presentation/manager/Fetch_cart_items.dart/fetch_cart_items_cubit.dart';
 import 'package:style/features/Product_Details/presentation/view/Widgets/Custom_Expansion_Tile.dart';
 import 'package:style/features/Product_Details/presentation/view/Widgets/Similiar_Products_List_view.dart';
 import 'package:style/features/Product_Details/presentation/view/Widgets/product_quantity_counter.dart';
@@ -14,9 +17,7 @@ class ProductDetailsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // BlocProvider.of<FetchSimiliarItemCubit>(
-    //   context,
-    // ).fetchSimiliarproductsitem(product: model);
+    int quantity = 0;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
       child: Column(
@@ -89,6 +90,7 @@ class ProductDetailsSection extends StatelessWidget {
           ProductQuantityCounter(
             initialQuantity: 1,
             onQuantityChanged: (value) {
+              quantity = value;
               // Handle quantity change if needed
             },
           ),
@@ -107,16 +109,48 @@ class ProductDetailsSection extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    CustomBottom(
-                      color: Consts.black10,
-                      text: "Add to Cart",
-                      onPressed: () {},
-                      icon: Icons.card_giftcard,
+                    BlocConsumer<AddToCartCubit, AddToCartState>(
+                      builder: (context, state) {
+                        return CustomBottom(
+                          color: Consts.black10,
+                          text: switch (state) {
+                            AddToCartLoading() => 'Adding...',
+                            AddToCartSuccess() => 'Added',
+                            AddToCartFailure() => 'Try Again',
+                            _ => 'Add to Cart',
+                          },
+                          onPressed: () {
+                            print(state);
+                            BlocProvider.of<AddToCartCubit>(context).addToCart(
+                              product: model,
+                              userId: 1, // Replace with actual user ID
+                              quantity: quantity,
+                            );
+                          },
+                          icon: Icons.card_giftcard,
+                        );
+                      },
+                      listener: (context, state) {
+                        if (state is AddToCartFailure) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(state.errorMessage)),
+                          );
+                        }
+                        else if (state is AddToCartSuccess) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Product added to cart')),
+                          );
+                          context.read<FetchCartItemsCubit>().fetchCartItems(userId: 1);
+                        }
+                      },
                     ),
                     const SizedBox(height: 10),
                     CustomBottom(
                       text: "Buy Now",
-                      onPressed: () {},
+                      onPressed: () {
+                        print("object");
+                      },
                       icon: Icons.shopping_bag,
                     ),
                   ],
@@ -128,11 +162,46 @@ class ProductDetailsSection extends StatelessWidget {
                   // Give Add to Cart a slightly larger share of the width
                   Expanded(
                     flex: 1,
-                    child: CustomBottom(
-                      color: Consts.black10,
-                      text: "Add to Cart",
-                      onPressed: () {},
-                      icon: Icons.card_giftcard,
+                    child: BlocConsumer<AddToCartCubit, AddToCartState>(
+                      builder: (context, state) {
+                        return CustomBottom(
+                          color: Consts.black10,
+                          text: switch (state) {
+                            AddToCartLoading() => 'Adding...',
+                            AddToCartSuccess() => 'Added',
+                            AddToCartFailure() => 'Try Again',
+                            _ => 'Add to Cart',
+                          },
+
+                          onPressed: () {
+                            BlocProvider.of<AddToCartCubit>(context).addToCart(
+                              product: model,
+                              userId: 1, // Replace with actual user ID
+                              quantity: quantity,
+                            );
+                            if (state is AddToCartFailure) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(state.errorMessage)),
+                              );
+                            }
+                          },
+                          icon: Icons.card_giftcard,
+                        );
+                      },
+                       listener: (context, state) {
+                        if (state is AddToCartFailure) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(state.errorMessage)),
+                          );
+                        }
+                        else if (state is AddToCartSuccess) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Product added to cart')),
+                          );
+                          context.read<FetchCartItemsCubit>().fetchCartItems(userId: 1);
+                        }
+                      },
                     ),
                   ),
                   const SizedBox(width: 6),

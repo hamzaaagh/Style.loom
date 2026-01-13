@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:style/core/Models/product_model/product_model.dart';
 
-import 'package:style/core/utils/Api/api.dart';
+import 'package:style/core/utils/Api/api_service.dart';
 import 'package:style/core/utils/errors/failurs.dart';
 import 'Product_View_repo.dart';
 
